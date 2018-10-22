@@ -1,0 +1,7 @@
+3.2.0
+=====
+
+### Major Feaures
+
+- Custom Kanban layouts
+- Improved drag-n-drop

@@ -1,0 +1,18 @@
+4.1
+====
+
+- ability to define custom Filters
+- ability to override structure of Pivot
+- ability to process data on a server-side
+
+
+3.4
+=====
+
+- addOperation API added
+
+
+3.2
+=====
+
+- Performance improvements

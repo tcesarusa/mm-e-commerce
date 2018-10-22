@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Init with inline data</title>
+    <link rel="stylesheet" href="../../codebase/webix/webix.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/webix/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div class='header_comment'>Loading from inline datasource</div>
+<div id="testA"></div>
+
+
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        webix.ui({
+            container:"testA",
+            height:300,
+            width:1000,
+            cols:[
+                {
+                    id:"pivot",
+                    view:"pivot-chart",
+                    structure:{
+                        groupBy: "year",
+                        values: [{name:"balance", operation:"max"},{name:"oil", operation:"max"}],
+                        filters:[{name:"continent", type:"select"}, {name:"name", type:"select"}, {name:"year", type:"select"}]
+                    },
+                    on:{
+                        onViewInit: function(name, config){
+                            if(name == "filters" && $$("pivotFilters"))
+                                webix.ui(config.elements, $$("pivotFilters"));
+                            config.elements = false;
+                        }
+                    },
+                    data:pivot_dataset
+                },
+                {
+                    id: "pivotFilters",
+                    rows:[{}]
+                }
+            ]
+
+
+
+        });
+    });
+</script>
+</body>
+</html>

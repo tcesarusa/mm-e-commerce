@@ -1,0 +1,52 @@
+{
+  "name": "elfeffe/google-shopping-product-feed",
+  "description": "Google Shopping Product Feed for PHP",
+  "homepage": "https://github.com/elfeffe/google-shopping-product-feed",
+  "license": "GPLv3",
+  "keywords": [
+    "Google",
+    "Shopping",
+    "Google Shopping Feed",
+    "Feed",
+    "API",
+    "PHP",
+    "AdWords"
+  ],
+  "authors": [
+    {
+      "name": "Elliot J. Reed",
+      "email": "google-shopping-product-feed@elliotjreed.com",
+      "homepage": "http://www.elliotjreed.com",
+      "role": "Developer"
+    }
+  ],
+  "support": {
+    "email": "google-shopping-product-feed@ninthyard.co.uk",
+    "issues": "https://github.com/elfeffe/google-shopping-product-feed/issues",
+    "source": "https://github.com/elfeffe/google-shopping-product-feed",
+    "docs": "http://www.ninthyard.co.uk/google-shopping-product-feed"
+  },
+  "require": {
+    "php": ">=5.3.0"
+  },
+  "require-dev": {
+    "php": ">=5.3.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "elfeffe\\GoogleShoppingFeed\\": "src/NinthYard/GoogleShoppingFeed"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.org/packages/elfeffe/google-shopping-product-feed"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/elfeffe/google-shopping-product-feed"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

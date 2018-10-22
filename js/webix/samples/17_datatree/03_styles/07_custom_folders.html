@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Custom Folders</title>
+        <link rel="stylesheet" href="../../../codebase/webix.css" type="text/css" charset="utf-8">
+        <script src="../../../codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+
+        <script src="../common/treedata.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" type="text/css" href="../common/samples.css">
+
+    </head>
+    <body>
+        <div class='header_comment'>Stylized DataTree type</div>
+        <div id="testA" style='width:auto; height:800px; float:left'></div>
+        <div id="attributes" style='width:auto; height:auto; margin-left:100px;  float:left'></div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf-8">
+
+            webix.ready(function () {
+
+                tree = webix.ui({
+                    container: "testA",
+                    view: "tree",
+                    select: "multiselect",
+                    drag: true,
+                    on: {
+                        //default click behavior that is true for any datatable cell
+                        "onItemClick": function (id, e, trg) {
+                            $("#attributes").html('Properties from product '+id+' here');
+                            webix.message("Click on row: " + id);
+
+                        }
+                    },
+                    ready: function () {
+
+                        this.select("1.2");
+                    },
+                    data: smalltreedata
+                });
+
+            });
+        </script>
+    </body>
+    <style type="text/css">
+        .webix_tree_folder{
+            background-image: url(icons/new_folder.png);
+            background-position: 0px 4px;
+        }
+        .webix_tree_folder_open{
+            background-image: url(icons/new_folder.png);
+            background-position: 0px 4px;
+        }
+        .webix_tree_file{
+            background-image: url(icons/file.png);
+            background-position: 0px 4px;
+        }
+    </style>
+</html>

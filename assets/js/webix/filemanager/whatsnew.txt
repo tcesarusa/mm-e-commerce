@@ -1,0 +1,21 @@
+Version 3.4.0
+================
+
+- Sparklines in a spreadsheet
+- Images in a spreadsheet
+
+
+Version 3.2.0
+================
+
+### Major Feaures
+
+- Editable data sheet
+- Merging and splitting cells
+- Column and row resizing
+- Block selection and block operations
+- Colors, Fonts, Borders and text styling
+- Undo and Redo functionality
+- Fully client side math implementation
+- Ability to load and save to server side
+- Ability to load and export excel files

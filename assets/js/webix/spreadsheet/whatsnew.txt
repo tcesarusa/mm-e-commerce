@@ -1,0 +1,32 @@
+Version 4.0
+================
+
+### Major Feaures
+
+- Multiple sheets per widgets
+- Conditional formatting
+- Custom number formats
+- Ribbon like toolbar
+- Named ranges
+- Images and Charts in the spreadsheet
+- Configurable context menu
+- Configurable top level menu
+- Split-columns and split-rows functionality
+- Extended math operations
+- Links in the spreadsheet
+
+
+Version 3.2
+================
+
+### Major Feaures
+
+- Editable data sheet
+- Merging and splitting cells
+- Column and row resizing
+- Block selection and block operations
+- Colors, Fonts, Borders and text styling
+- Undo and Redo functionality
+- Fully client side math implementation
+- Ability to load and save to server side
+- Ability to load and export excel files

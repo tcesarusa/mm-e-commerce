@@ -1,0 +1,94 @@
+[27-Jan-2018 10:07:11 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:09:42 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:10:00 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:10:38 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:12:28 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:12:30 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:12:45 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:12:53 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:12:58 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:13:42 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:13:43 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:14:10 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:14:11 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:14:16 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:14:22 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 24
+[27-Jan-2018 10:16:32 America/Chicago] PHP Warning:  include(footer.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:16:32 America/Chicago] PHP Warning:  include(footer.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:16:32 America/Chicago] PHP Warning:  include(): Failed opening 'footer.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:16:32 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 25
+[27-Jan-2018 10:17:32 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:32 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:32 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:32 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 26
+[27-Jan-2018 10:17:42 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:42 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:42 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:17:42 America/Chicago] PHP Fatal error:  Call to undefined function site_url() in /home3/atobla/5bucksla/js/general_js.php on line 26
+[27-Jan-2018 10:18:22 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:22 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:22 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:22 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:18:28 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:28 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:28 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:28 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:18:30 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:30 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:30 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:30 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:18:46 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:46 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:46 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:18:46 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:18:59 America/Chicago] PHP Warning:  require(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:00 America/Chicago] PHP Warning:  require(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:00 America/Chicago] PHP Fatal error:  require(): Failed opening required 'application/core/My_Default.php' (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:18 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:18 America/Chicago] PHP Warning:  include(application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:18 America/Chicago] PHP Warning:  include(): Failed opening 'application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:18 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:19:30 America/Chicago] PHP Warning:  include(../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:30 America/Chicago] PHP Warning:  include(../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:30 America/Chicago] PHP Warning:  include(): Failed opening '../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:30 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:19:36 America/Chicago] PHP Warning:  include(../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:36 America/Chicago] PHP Warning:  include(../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:36 America/Chicago] PHP Warning:  include(): Failed opening '../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:36 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:19:41 America/Chicago] PHP Warning:  include(../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:41 America/Chicago] PHP Warning:  include(../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:41 America/Chicago] PHP Warning:  include(): Failed opening '../../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:41 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:19:45 America/Chicago] PHP Warning:  include(../../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:45 America/Chicago] PHP Warning:  include(../../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:45 America/Chicago] PHP Warning:  include(): Failed opening '../../../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:45 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:19:47 America/Chicago] PHP Warning:  include(../../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:47 America/Chicago] PHP Warning:  include(../../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:47 America/Chicago] PHP Warning:  include(): Failed opening '../../../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:19:47 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:20:18 America/Chicago] PHP Warning:  include(FCPATH/application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:20:18 America/Chicago] PHP Warning:  include(FCPATH/application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:20:18 America/Chicago] PHP Warning:  include(): Failed opening 'FCPATH/application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 1
+[27-Jan-2018 10:20:18 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:20:27 America/Chicago] PHP Warning:  include(FCPATH/application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:20:27 America/Chicago] PHP Warning:  include(FCPATH/application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:20:27 America/Chicago] PHP Warning:  include(): Failed opening 'FCPATH/application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:20:27 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 4
+[27-Jan-2018 10:20:45 America/Chicago] PHP Warning:  include(/application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:20:45 America/Chicago] PHP Warning:  include(): Failed opening '/application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:20:45 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:21:16 America/Chicago] PHP Warning:  include(../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:16 America/Chicago] PHP Warning:  include(../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:16 America/Chicago] PHP Warning:  include(): Failed opening '../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:16 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:21:24 America/Chicago] PHP Warning:  include(../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:24 America/Chicago] PHP Warning:  include(../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:24 America/Chicago] PHP Warning:  include(): Failed opening '../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:24 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:21:43 America/Chicago] PHP Warning:  include(../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:43 America/Chicago] PHP Warning:  include(../../../application/core/My_Default.php): failed to open stream: No such file or directory in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:43 America/Chicago] PHP Warning:  include(): Failed opening '../../../application/core/My_Default.php' for inclusion (include_path='.:/opt/php56/lib/php') in /home3/atobla/5bucksla/js/general_js.php on line 2
+[27-Jan-2018 10:21:43 America/Chicago] PHP Fatal error:  Using $this when not in object context in /home3/atobla/5bucksla/js/general_js.php on line 3
+[27-Jan-2018 10:22:02 America/Chicago] PHP Fatal error:  Call to undefined function base_url() in /home3/atobla/5bucksla/js/general_js.php on line 2

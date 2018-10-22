@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Custom filter container</title>
+    <link rel="stylesheet" href="../../codebase/webix/webix.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/webix/webix.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="../../codebase//pivot.css" type="text/css" charset="utf-8">
+    <script src="../../codebase/pivot.js" type="text/javascript" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="../common/samples.css" type="text/css" charset="utf-8">
+    <script src="../common/testdata.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<div id="testA"></div>
+
+<style type="text/css">
+    html, body {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+    }
+</style>
+
+<script type="text/javascript" charset="utf-8">
+
+    webix.ready(function(){
+        webix.ui({
+            container: "testA",
+            height: 350,
+            width: 1000,
+            cols: [
+                {
+                    gravity: 2,
+                    id: "pivot",
+                    view: "pivot",
+                    structure: {
+                        rows: ["name"],
+                        columns: ["year"],
+                        values: [{name: "oil", operation: ["min", "sum"]}],
+                        filters: [
+                            {name: "continent", type: "select"},
+                            {name: "form", type: "select"}
+                        ]
+                    },
+                    on:{
+                        onViewInit: function(name, config){
+                            if(name == "filters" && $$("pivotFilters"))
+                                webix.ui(config.elements, $$("pivotFilters"));
+                            config.elements = false;
+                        }
+                    }
+                },
+                {
+                    id: "pivotFilters",
+                    rows:[{}]
+                }
+            ]
+        });
+        $$("pivot").parse(pivot_dataset);
+    });
+</script>
+</body>
+</html>

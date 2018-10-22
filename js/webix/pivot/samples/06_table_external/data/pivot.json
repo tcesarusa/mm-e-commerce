@@ -1,0 +1,316 @@
+{
+	"structure": {
+		"rows": ["year"],
+		"columns": ["continent"],
+		"values": [{ "name":"oil", "operation":["min","sum"]}]
+	},
+	"data": {
+		"header": [
+			{
+				"id": "name",
+				"template": "{common.treetable()} #name#",
+				"header": {}
+			},
+			{
+				"id": "Africa_'_min_'_oil",
+				"header": [
+					{
+						"name": "Africa",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Africa_'_sum_'_oil",
+				"header": [
+					{
+						"name": "Africa"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Asia_'_min_'_oil",
+				"header": [
+					{
+						"name": "Asia",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Asia_'_sum_'_oil",
+				"header": [
+					{
+						"name": "Asia"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Australia_'_min_'_oil",
+				"header": [
+					{
+						"name": "Australia",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Australia_'_sum_'_oil",
+				"header": [
+					{
+						"name": "Australia"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Europe_'_min_'_oil",
+				"header": [
+					{
+						"name": "Europe",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "Europe_'_sum_'_oil",
+				"header": [
+					{
+						"name": "Europe"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "North America_'_min_'_oil",
+				"header": [
+					{
+						"name": "North America",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "North America_'_sum_'_oil",
+				"header": [
+					{
+						"name": "North America"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "South America_'_min_'_oil",
+				"header": [
+					{
+						"name": "South America",
+						"colspan": 2
+					},
+					{
+						"name": "min_'_oil",
+						"operation": "min",
+						"text": "oil"
+					}
+				]
+			},
+			{
+				"id": "South America_'_sum_'_oil",
+				"header": [
+					{
+						"name": "South America"
+					},
+					{
+						"name": "sum_'_oil",
+						"operation": "sum",
+						"text": "oil"
+					}
+				]
+			}
+		],
+		"data": [
+			{
+				"South America_'_min_'_oil": 0.518,
+				"South America_'_sum_'_oil": 13.842,
+				"Australia_'_min_'_oil": 2.946,
+				"Australia_'_sum_'_oil": 10.959999999999999,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 260.475,
+				"North America_'_min_'_oil": 27.777,
+				"North America_'_sum_'_oil": 279.627,
+				"Africa_'_min_'_oil": 0.034,
+				"Africa_'_sum_'_oil": 4.69,
+				"Asia_'_min_'_oil": 0.778,
+				"Asia_'_sum_'_oil": 121.055,
+				"name": "2005"
+			},
+			{
+				"South America_'_min_'_oil": 0.651,
+				"South America_'_sum_'_oil": 17.748,
+				"Australia_'_min_'_oil": 3.641,
+				"Australia_'_sum_'_oil": 13.638,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 324.75300000000004,
+				"North America_'_min_'_oil": 30.626,
+				"North America_'_sum_'_oil": 333.07599999999996,
+				"Africa_'_min_'_oil": 0.05,
+				"Africa_'_sum_'_oil": 6.45,
+				"Asia_'_min_'_oil": 1.493,
+				"Asia_'_sum_'_oil": 163.64899999999997,
+				"name": "2006"
+			},
+			{
+				"South America_'_min_'_oil": 0.875,
+				"South America_'_sum_'_oil": 24.128,
+				"Australia_'_min_'_oil": 4.2,
+				"Australia_'_sum_'_oil": 16.522,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 351.732,
+				"North America_'_min_'_oil": 34.726,
+				"North America_'_sum_'_oil": 381.426,
+				"Africa_'_min_'_oil": 0.068,
+				"Africa_'_sum_'_oil": 4.965,
+				"Asia_'_min_'_oil": 1.826,
+				"Asia_'_sum_'_oil": 194.65599999999998,
+				"name": "2007"
+			},
+			{
+				"South America_'_min_'_oil": 1.754,
+				"South America_'_sum_'_oil": 36.592,
+				"Australia_'_min_'_oil": 5.806,
+				"Australia_'_sum_'_oil": 21.084,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 494.24499999999995,
+				"North America_'_min_'_oil": 49.833,
+				"North America_'_sum_'_oil": 525.958,
+				"Africa_'_min_'_oil": 0.092,
+				"Africa_'_sum_'_oil": 10.69,
+				"Asia_'_min_'_oil": 2.773,
+				"Asia_'_sum_'_oil": 305.97700000000003,
+				"name": "2008"
+			},
+			{
+				"South America_'_min_'_oil": 1.15,
+				"South America_'_sum_'_oil": 20.251,
+				"Australia_'_min_'_oil": 3.51,
+				"Australia_'_sum_'_oil": 13.258,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 318.055,
+				"North America_'_min_'_oil": 29.701,
+				"North America_'_sum_'_oil": 297.401,
+				"Africa_'_min_'_oil": 0.065,
+				"Africa_'_sum_'_oil": 8.2,
+				"Asia_'_min_'_oil": 1.446,
+				"Asia_'_sum_'_oil": 205.804,
+				"name": "2009"
+			},
+			{
+				"South America_'_min_'_oil": 2.008,
+				"South America_'_sum_'_oil": 32.571,
+				"Australia_'_min_'_oil": 4.486,
+				"Australia_'_sum_'_oil": 19.396,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 368.40200000000004,
+				"North America_'_min_'_oil": 39.361,
+				"North America_'_sum_'_oil": 393.111,
+				"Africa_'_min_'_oil": 0.082,
+				"Africa_'_sum_'_oil": 7.023,
+				"Asia_'_min_'_oil": 2.402,
+				"Asia_'_sum_'_oil": 297.836,
+				"name": "2010"
+			},
+			{
+				"South America_'_min_'_oil": 3.756,
+				"South America_'_sum_'_oil": 50.668,
+				"Australia_'_min_'_oil": 6.181,
+				"Australia_'_sum_'_oil": 27.678,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 478.2729999999999,
+				"North America_'_min_'_oil": 52.574,
+				"North America_'_sum_'_oil": 514.874,
+				"Africa_'_min_'_oil": 0.1,
+				"Africa_'_sum_'_oil": 11.99,
+				"Asia_'_min_'_oil": 2.502,
+				"Asia_'_sum_'_oil": 428.26599999999996,
+				"name": "2011"
+			},
+			{
+				"South America_'_min_'_oil": 4.056,
+				"South America_'_sum_'_oil": 52.315,
+				"Australia_'_min_'_oil": 6.736,
+				"Australia_'_sum_'_oil": 29.332,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 483.4030000000001,
+				"North America_'_min_'_oil": 51.378,
+				"North America_'_sum_'_oil": 509.835,
+				"Africa_'_min_'_oil": 0.111,
+				"Africa_'_sum_'_oil": 14.681000000000001,
+				"Asia_'_min_'_oil": 2.93,
+				"Asia_'_sum_'_oil": 458.519,
+				"name": "2012"
+			},
+			{
+				"South America_'_min_'_oil": 4.219,
+				"South America_'_sum_'_oil": 54.718,
+				"Australia_'_min_'_oil": 6.485,
+				"Australia_'_sum_'_oil": 30.134999999999998,
+				"Europe_'_min_'_oil": 0,
+				"Europe_'_sum_'_oil": 476.92900000000003,
+				"North America_'_min_'_oil": 50.408,
+				"North America_'_sum_'_oil": 515.3149999999999,
+				"Africa_'_min_'_oil": 0.113,
+				"Africa_'_sum_'_oil": 14.738999999999999,
+				"Asia_'_min_'_oil": 3.104,
+				"Asia_'_sum_'_oil": 466.93,
+				"name": "2013"
+			}
+		]
+	}
+
+}
