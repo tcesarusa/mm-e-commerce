@@ -61,13 +61,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $active_group = 'default';
 $query_builder = TRUE;
-
+$url = $_SERVER['SERVER_NAME'];
+if($url == "localhost")
+{
+    $database = "mm_e_commerce";
+    $user_name = "root";
+    $password = "";
+}else{
+    $database = "atobla_mm_e_commerce";
+    $user_name = "atobla_test";
+    $password = "test123456789";
+}
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'atobla_test',
-	'password' => 'test123456789',
-	'database' => 'atobla_mm_e_commerce',
+	'username' => $user_name,
+	'password' => $password,
+	'database' => $database,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
