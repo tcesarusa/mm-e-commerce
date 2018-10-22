@@ -62,16 +62,16 @@
                                             <b></b>
                                             <div class="input-append">
                                                     <?php $size = str_replace(" ", "_", $cart_data['size']); ?>
-                                                <input class="span1" readonly style="max-width:34px" name="cart_qtt[]" placeholder="1" pattern=" 0+\.[0-9]*[1-9][0-9]*$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="product_qtt<?php echo $cart_data['product_id'] . "-" . $cart_data['color']. "-".$size; ?>" size="16" type="text" value="<?php echo $cart_data['product_quantity']; ?>">
-                                                <button class="btn" type="button" onclick="remove_qtt('<?php echo $cart_data['color']; ?>', <?php echo $cart_data['product_id']; ?>, '<?php echo $cart_data['size']; ?>', '<?php echo $cart_data['product_price']; ?>', '<?php echo $size; ?>');"><i class="icon-minus"></i></button>
-                                                <button class="btn" type="button" onclick="add_qtt('<?php echo $cart_data['color']; ?>', '<?php echo $cart_data['product_id']; ?>', '<?php echo $cart_data['size']; ?>', '<?php echo $cart_data['product_price']; ?>', '<?php echo $size; ?>');"><i class="icon-plus"></i></button>
+                                                <input class="span1" readonly style="max-width:34px" name="cart_qtt[]" placeholder="1" pattern=" 0+\.[0-9]*[1-9][0-9]*$" onkeypress="return event.charCode >= 48 && event.charCode <= 57" id="product_qtt<?php echo $cart_data['product_id'] . "-" . $cart_data['color_id']. "-".$size; ?>" size="16" type="text" value="<?php echo $cart_data['product_quantity']; ?>">
+                                                <button class="btn" type="button" onclick="remove_qtt('<?php echo $cart_data['color_id']; ?>', <?php echo $cart_data['product_id']; ?>, '<?php echo $cart_data['size_id']; ?>', '<?php echo $cart_data['product_price']; ?>', '<?php echo $size; ?>');"><i class="icon-minus"></i></button>
+                                                <button class="btn" type="button" onclick="add_qtt('<?php echo $cart_data['color_id']; ?>', '<?php echo $cart_data['product_id']; ?>', '<?php echo $cart_data['size_id']; ?>', '<?php echo $cart_data['product_price']; ?>', '<?php echo $size; ?>');"><i class="icon-plus"></i></button>
                                             </div>
                                     </td>
                                     <td><?php echo $cart_data['color']; ?></td>
                                     <td><?php echo $cart_data['size']; ?></td>
                                     <td><?php echo "$" . $cart_data['product_price']; ?></td>
                             <input type="hidden" id="hidden_total_private<?php echo $cart_data['product_id']; ?>" value="<?php echo $cart_data['product_price'] * $cart_data['product_quantity']; ?>">
-                            <td><span id="subtotal_private<?php echo $cart_data['product_id']; ?>"><?php echo "$" . money_format("%i", $cart_data['product_price'] * $cart_data['product_quantity']); ?></span></td>
+                            <td><span id="subtotal_private<?php echo $cart_data['product_id']; ?>"><?php echo "$" . number_format($cart_data['product_price'] * $cart_data['product_quantity'] ,2); ?></span></td>
                             <td><button class="btn btn-danger" type="button" title="Remove from cart" onclick="remove_from_cart(<?php echo $cart_data['product_id']; ?>, '<?php echo $cart_data['color']; ?>', '<?php echo $cart_data['size']; ?>');"><i class="icon-remove icon-white"></i></button></td>
                             </tr>
                             <?php
@@ -81,7 +81,7 @@
 
                         <tr>
                             <td colspan="8" style="text-align:right">Subtotal:	</td>
-                            <td ><span id="total_price_cart">$<?php echo money_format("%i", $total_price); ?></a></td>
+                            <td ><span id="total_price_cart">$<?php echo number_format( $total_price, 2); ?></a></td>
                         </tr>
                         <tr>
                             <td colspan="8" style="text-align:right">Total Discount:	</td>
@@ -89,9 +89,9 @@
                         </tr>
                         <tr>
                             <td colspan="8" style="text-align:right">Total Shipping:	</td>
-                            <td id="receive_shipping_price"> <?php
+                            <td id="receive_shipping_price"> $<?php
                                 if ($total_shipping != null) {
-                                    echo "$" . money_format("%i", $total_shipping);
+                                    echo number_format($total_shipping, 2);
                                 } else {
                                     echo "$0.00";
                                 }
@@ -105,7 +105,7 @@
                             <td colspan="8" style="text-align:right"><strong>TOTAL <!--($228 - $50 + $31) =--></strong></td>
                             <td class="label label-important" style="display:block"> <strong id="receive_cart_total"> $<?php
                                     if ($cart_total != null) {
-                                        echo money_format("%i", $cart_total);
+                                        echo number_format($cart_total, 2);
                                     } else {
                                         echo "$0.00";
                                     }
@@ -259,7 +259,7 @@
                         </tr>
                         <tr>
                             <td colspan="0" style="text-align:right">Subtotal:	</td>
-                            <td style="width:50px;"><span id="total_price_cart_bottom">$<?php echo money_format("%i", $total_price); ?></a></td>
+                            <td style="width:50px;"><span id="total_price_cart_bottom">$<?php echo number_format( $total_price, 2); ?></a></td>
                         </tr>
                         <tr>
                             <td colspan="0" style="text-align:right">Total Discount:	</td>
@@ -269,7 +269,7 @@
                             <td colspan="0" style="text-align:right">Total Shipping:	</td>
                             <td id="receive_shipping_price_bottom"> <?php
                                 if ($total_shipping != null) {
-                                    echo "$" . money_format("%i", $total_shipping);
+                                    echo "$" . number_format($total_shipping, 2);
                                 } else {
                                     echo "$0.00";
                                 }
@@ -283,7 +283,7 @@
                             <td colspan="0" style="text-align:right"><strong>TOTAL <!--($228 - $50 + $31) =--></strong></td>
                             <td class="label label-important" style="display:block"> <strong id="receive_cart_total_bottom"> $<?php
                                     if ($cart_total != null) {
-                                        echo money_format("%i", $cart_total);
+                                        echo number_format($cart_total, 2);
                                     } else {
                                         echo "$0.00";
                                     }

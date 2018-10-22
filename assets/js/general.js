@@ -68,7 +68,7 @@ function add_ship_cart(provider, service, rate, days)
 
 function add_cart(product_id, qtt, add, cart_color, cart_size, product_price)
 {
-
+    console.log("product_id:" + product_id + " qtt:" + qtt + " cart_color:" + cart_color + " cart_size:" + cart_size + " product_price:" + product_price);
     $("#calculating_cart").modal("toggle");
     $("#receive_shipping_price").html("$0.00");
     $.post(site_url + "Customer_products/add_cart",
@@ -246,10 +246,17 @@ $("#sort_by_form").submit(function (event) {
 $("#sort_by").change(function () {
     $("#sort_by_form").submit();
 });
-$("#add_cart_product_details").click(function () {
+function add_cart_product_details(product_id, size_required, price)
+{
+    if(size_required == "on")
+    {
 
-    add_cart($('#product_id').val(), $('#quantity_product_details').val(), 'added', $('#product_color_name').val(), $('#product_size_name').val(), cart_price);
-});
+    add_cart(product_id, $('#quantity_product_details').val(), 'added', $('#product_color').val(), $('#product_size').val(), price);
+}else{
+        add_cart(product_id, $('#quantity_product_details').val(), 'added', '-1', '-1', price);
+    }
+}
+
 
 
 $("#add_cart_preview").click(function () {
@@ -352,57 +359,60 @@ function update_color_size_index(product_id)
     });
 }
 
-function cart_call_products_small(product_id)
+function cart_call_products_small(product_id, size_required, price)
 {
-    if ($('#product_size_small_' + product_id).val() != '' && $('#product_color_small_' + product_id).val() != '' && $('#quantity_product_small_' + product_id).val() > 0) {
-        add_cart(product_id, $('#quantity_product_small_' + product_id).val(), 'added', $('#product_color_name_small_' + product_id).val(), $('#product_size_name_small_' + product_id).val(), cart_price);
-    } else
-    {
-        if ($('#product_color_small_' + product_id).val() == '')
-        {
-            $('#product_size_small_' + product_id).css("border-color", "");
-            $('#product_color_small_' + product_id).css("border-color", "red");
-            $('#quantity_product_small_' + product_id).css("border-color", "");
-        } else if ($('#product_size_small_' + product_id).val() == '')
-        {
-            $('#product_color_small_' + product_id).css("border-color", "");
-            $('#product_size_small_' + product_id).css("border-color", "red");
-            $('#quantity_product_small_' + product_id).css("border-color", "");
-        } else if ($('#quantity_product_small_' + product_id).val() <= 0) {
-            $('#quantity_product_small_' + product_id).css("border-color", "red");
-            $('#product_color_small_' + product_id).css("border-color", "");
-            $('#product_size_small_' + product_id).css("border-color", "");
+    if(size_required == "on") {
+        if ($('#product_size_small_' + product_id).val() != '' && $('#product_color_small_' + product_id).val() != '' && $('#quantity_product_small_' + product_id).val() > 0) {
+            add_cart(product_id, $('#quantity_product_small_' + product_id).val(), 'added', $('#product_color_name_small_' + product_id).val(), $('#product_size_name_small_' + product_id).val(), price);
+        } else {
+            if ($('#product_color_small_' + product_id).val() == '') {
+                $('#product_size_small_' + product_id).css("border-color", "");
+                $('#product_color_small_' + product_id).css("border-color", "red");
+                $('#quantity_product_small_' + product_id).css("border-color", "");
+            } else if ($('#product_size_small_' + product_id).val() == '') {
+                $('#product_color_small_' + product_id).css("border-color", "");
+                $('#product_size_small_' + product_id).css("border-color", "red");
+                $('#quantity_product_small_' + product_id).css("border-color", "");
+            } else if ($('#quantity_product_small_' + product_id).val() <= 0) {
+                $('#quantity_product_small_' + product_id).css("border-color", "red");
+                $('#product_color_small_' + product_id).css("border-color", "");
+                $('#product_size_small_' + product_id).css("border-color", "");
+            }
         }
+    }else{
+        add_cart(product_id, $('#quantity_product_small_' + product_id).val(), 'added', "-1", "-1", price);
     }
 }
 
-function cart_call_side_menu(product_id)
+function cart_call_side_menu(product_id, size_required, price)
 {
-    if ($('#product_size_side_menu_' + product_id).val() != '' && $('#product_color_side_menu_' + product_id).val() != '' && $('#quantity_product_side_menu_' + product_id).val() > 0) {
-        add_cart(product_id, $('#quantity_product_side_menu_' + product_id).val(), 'added', $('#product_color_name_side_menu_' + product_id).val(), $('#product_size_name_side_menu_' + product_id).val(), cart_price);
-    } else
-    {
-        if ($('#product_color_side_menu_' + product_id).val() == '')
-        {
-            $('#product_size_side_menu_' + product_id).css("border-color", "");
-            $('#product_color_side_menu_' + product_id).css("border-color", "red");
-            $('#quantity_product_side_menu_' + product_id).css("border-color", "");
-        } else if ($('#product_size_side_menu_' + product_id).val() == '')
-        {
-            $('#product_color_side_menu_' + product_id).css("border-color", "");
-            $('#product_size_side_menu_' + product_id).css("border-color", "red");
-            $('#quantity_product_side_menu_' + product_id).css("border-color", "");
-        } else if ($('#quantity_product_side_menu_' + product_id).val() <= 0) {
-            $('#quantity_product_side_menu_' + product_id).css("border-color", "red");
-            $('#product_color_side_menu_' + product_id).css("border-color", "");
-            $('#product_size_side_menu_' + product_id).css("border-color", "");
+    if(size_required == "on") {
+        if ($('#product_size_side_menu_' + product_id).val() != '' && $('#product_color_side_menu_' + product_id).val() != '' && $('#quantity_product_side_menu_' + product_id).val() > 0) {
+            add_cart(product_id, $('#quantity_product_side_menu_' + product_id).val(), 'added', $('#product_color_name_side_menu_' + product_id).val(), $('#product_size_name_side_menu_' + product_id).val(), price);
+        } else {
+            if ($('#product_color_side_menu_' + product_id).val() == '') {
+                $('#product_size_side_menu_' + product_id).css("border-color", "");
+                $('#product_color_side_menu_' + product_id).css("border-color", "red");
+                $('#quantity_product_side_menu_' + product_id).css("border-color", "");
+            } else if ($('#product_size_side_menu_' + product_id).val() == '') {
+                $('#product_color_side_menu_' + product_id).css("border-color", "");
+                $('#product_size_side_menu_' + product_id).css("border-color", "red");
+                $('#quantity_product_side_menu_' + product_id).css("border-color", "");
+            } else if ($('#quantity_product_side_menu_' + product_id).val() <= 0) {
+                $('#quantity_product_side_menu_' + product_id).css("border-color", "red");
+                $('#product_color_side_menu_' + product_id).css("border-color", "");
+                $('#product_size_side_menu_' + product_id).css("border-color", "");
+            }
         }
+    }else{
+        add_cart(product_id, $('#quantity_product_side_menu_' + product_id).val(), 'added', '-1','-1', price);
     }
 }
-function cart_call(product_id)
+function cart_call(product_id, size_required, price)
 {
+    if(size_required == "on") {
     if ($('#product_size_' + product_id).val() != '' && $('#product_color_' + product_id).val() != '' && $('#quantity_product_' + product_id).val() > 0) {
-        add_cart(product_id, $('#quantity_product_' + product_id).val(), 'added', $('#product_color_name_index_' + product_id).val(), $('#product_size_name_index_' + product_id).val(), cart_price);
+        add_cart(product_id, $('#quantity_product_' + product_id).val(), 'added', $('#product_color_name_index_' + product_id).val(), $('#product_size_name_index_' + product_id).val(), price);
     } else
     {
         if ($('#product_color_' + product_id).val() == '')
@@ -420,6 +430,9 @@ function cart_call(product_id)
             $('#product_color_' + product_id).css("border-color", "");
             $('#product_size_' + product_id).css("border-color", "");
         }
+    }
+    }else{
+        add_cart(product_id, $('#quantity_product_' + product_id).val(), 'added', '-1', '-1', price);
     }
 }
 function update_color_size()

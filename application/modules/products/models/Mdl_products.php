@@ -61,11 +61,6 @@ class Mdl_Products extends Response_Model {
                 'label' => "Video URL",
                 'rules' => ''
             ),
-            'product_sizerequired' => array(
-                'field' => 'product_sizerequired',
-                'label' => "Product Size Required",
-                'rules' => ''
-            ),
             'product_quantity' => array(
                 'field' => 'product_quantity',
                 'label' => trans('product_quantity'),
@@ -181,6 +176,11 @@ class Mdl_Products extends Response_Model {
                 'field' => 'ebay_title',
                 'label' => "Ebay Title",
                 'rules' => 'required'
+            ),
+            'product_sizerequired' => array(
+                'field' => 'product_sizerequired',
+                'label' => "Sizes are required",
+                'rules' => ''
             )
         );
     }
@@ -192,6 +192,7 @@ class Mdl_Products extends Response_Model {
         $db_array = parent::db_array();
 
         $db_array['product_price'] = (empty($db_array['product_price']) ? null : standardize_amount($db_array['product_price']));
+        $db_array['product_sizerequired'] = (empty($db_array['product_sizerequired']) ? null : $db_array['product_sizerequired']);
         $db_array['purchase_price'] = (empty($db_array['purchase_price']) ? null : standardize_amount($db_array['purchase_price']));
         $db_array['family_id'] = (empty($db_array['family_id']) ? null : $db_array['family_id']);
         $db_array['unit_id'] = (empty($db_array['unit_id']) ? null : $db_array['unit_id']);

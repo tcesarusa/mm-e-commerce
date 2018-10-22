@@ -146,9 +146,9 @@
                         <input type="hidden" name="item_is_recurring" value="<?php echo $item_recurrence_state ?>"/>
                     <?php endif; ?>
                 </td>
-                <td rowspan="2"><img src="<?php echo $item->item_image_name;?>"/></td>
-                <?php if($item->item_image_preview != null) { ?><td rowspan="2"><img src="https://5bucksla.com/uploads/custom_tshirts/preview/<?php echo $item->item_image_preview;?>"/></td><?php } ?>
-                <?php if($item->item_image_preview_back != null) { ?><td rowspan="2"><img src="https://5bucksla.com/uploads/custom_tshirts/preview/<?php echo $item->item_image_preview_back;?>"/></td><?php } ?>
+                <td rowspan="2"><?php if(file_exists($item->item_image_name)) { ?><img src="<?php echo $item->item_image_name;?>"/> <?php } ?></td>
+                <?php if(file_exists("https://5bucksla.com/uploads/custom_tshirts/preview/$item->item_image_preview")) { ?><td rowspan="2"><img src="https://5bucksla.com/uploads/custom_tshirts/preview/<?php echo $item->item_image_preview;?>"/></td><?php } ?>
+                <?php if(file_exists("https://5bucksla.com/uploads/custom_tshirts/preview/$item->item_image_preview_back")) { ?><td rowspan="2"><img src="https://5bucksla.com/uploads/custom_tshirts/preview/<?php echo $item->item_image_preview_back;?>"/></td><?php } ?>
                 <td class="td-text"> 
                     <input type="hidden" name="invoice_id" value="<?php echo $invoice_id; ?>">
                     <input type="hidden" name="item_id" value="<?php echo $item->item_id; ?>"

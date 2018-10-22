@@ -371,46 +371,65 @@ class Customer_products extends My_Default {
     }
 
     public function add_cart() {
-        //$this->session->sess_destroy();
-        //return 0;
+//        $this->session->sess_destroy();
+//        return 0;
 
         $product_id = $this->input->post("product_id");
         $qtt = $this->input->post("qtt");
         $cart_color = $this->input->post("cart_color");
         $add = $this->input->post("add");
         $cart_size = $this->input->post("cart_size");
+        $color_name = "";
+        $size_name = "";
+        if($cart_color == -1 && $cart_size == -1)
+        {
+            $this->db->where("product_id", $product_id);
+            $product_dimensions = $this->db->get("ip_color_sizes")->row();
 
 
+            $color_name = "Does not apply";
+            $size_name = "Does not apply";
+            $cart_color = -1;
+            $cart_size = -1;
+        }else{
 
-        //GET COLOR_ID
-        $this->db->where("product_id", $product_id);
-        $this->db->where("color_name", $cart_color);
-        $ip_colors_data = $this->db->get("ip_colors")->result_object();
-
-        //GET SIZE_ID
-        $this->db->where("product_id", $product_id);
-        $this->db->where("size_name", $cart_size);
-        $ip_sizes_data = $this->db->get("ip_sizes")->result_object();
+//        //GET COLOR_ID
+//        $this->db->where("product_id", $product_id);
+//        $this->db->where("color_name", $cart_color);
+//        $ip_colors_data = $this->db->get("ip_colors")->result_object();
+//
+//        //GET SIZE_ID
+//        $this->db->where("product_id", $product_id);
+//        $this->db->where("size_name", $cart_size);
+//        $ip_sizes_data = $this->db->get("ip_sizes")->result_object();
 
         //GET PRODUCT DIMENSIONS
-        $this->db->where("product_id", $product_id);
-        $this->db->where("size_id", $ip_sizes_data[0]->size_id);
-        $this->db->where("color_id", $ip_colors_data[0]->color_id);
-        $product_dimensions = $this->db->get("ip_color_sizes")->result_object();
+        $this->db->join("ip_colors", "ip_colors.color_id = ip_color_sizes.color_id", "left");
+        $this->db->join("ip_sizes", "ip_sizes.size_id = ip_color_sizes.size_id", "left");
+        $this->db->where("ip_color_sizes.product_id", $product_id);
+        $this->db->where("ip_color_sizes.size_id", $cart_size);
+        $this->db->where("ip_color_sizes.color_id", $cart_color);
+        $product_dimensions = $this->db->get("ip_color_sizes")->row();
 
 
+            $color_name = $product_dimensions->color_name;
+            $size_name = $product_dimensions->size_name;
+        }
 
         $product_price = $this->input->post("product_price");
         $cart_qtt = 0;
         $cart_total = 0;
         $subtotal_calc = 0;
-        $subtotal = array();
         $already = 0;
         $cart_size_index = str_replace(" ", "_", $cart_size);
         //GET PRODUCT INFO FROM ADMIN
         $this->db->where("ip_products.product_id", $product_id);
         $product_data = $this->db->get("ip_products")->result_object();
         $data = $this->session->userdata('cart');
+
+
+
+
         foreach ($product_data as $product_data) {
             if (isset($data[$product_data->product_id . '-' . $cart_color . '-' . $cart_size_index]["product_quantity"]) == 0 && $qtt < 0) {
                 $qtt = 0;
@@ -427,12 +446,14 @@ class Customer_products extends My_Default {
                     "product_color" => $product_data->product_color,
                     "product_meta" => $product_data->product_meta,
                     "product_quantity" => $data[$product_data->product_id . '-' . $cart_color . '-' . $cart_size_index]['product_quantity'] + $qtt,
-                    "color" => $cart_color,
-                    "size" => $cart_size,
-                    "lenght" => $product_dimensions[0]->lenght,
-                    "width" => $product_dimensions[0]->width,
-                    "height" => $product_dimensions[0]->height,
-                    "weight" => $product_dimensions[0]->weight
+                    "color" => $color_name,
+                    "size" => $size_name,
+                    "color_id" => $cart_color,
+                    "size_id" => $cart_size,
+                    "lenght" => $product_dimensions->lenght,
+                    "width" => $product_dimensions->width,
+                    "height" => $product_dimensions->height,
+                    "weight" => $product_dimensions->weight
                 );
             } else {
 
@@ -446,14 +467,17 @@ class Customer_products extends My_Default {
                     "product_color" => $product_data->product_color,
                     "product_meta" => $product_data->product_meta,
                     "product_quantity" => $qtt,
-                    "color" => $cart_color,
-                    "size" => $cart_size,
-                    "lenght" => $product_dimensions[0]->lenght,
-                    "width" => $product_dimensions[0]->width,
-                    "height" => $product_dimensions[0]->height,
-                    "weight" => $product_dimensions[0]->weight
+                    "color" => $color_name,
+                    "size" => $size_name,
+                    "color_id" => $cart_color,
+                    "size_id" => $cart_size,
+                    "lenght" => $product_dimensions->lenght,
+                    "width" => $product_dimensions->width,
+                    "height" => $product_dimensions->height,
+                    "weight" => $product_dimensions->weight
                 );
             }
+
         }
 
 
@@ -467,17 +491,14 @@ class Customer_products extends My_Default {
         foreach ($this->session->userdata("cart") as $key => $cart_data) {
             $cart_qtt += $cart_data['product_quantity'];
             $cart_total += $cart_data['product_price'] * $cart_data['product_quantity'];
+            $subtotal_calc += $product_price * $cart_data['product_quantity'];
         }
         $this->session->set_userdata("cart_qtt", $cart_qtt);
         $this->session->set_userdata("cart_total", $cart_total);
         if ($cart_qtt == 0) {
             $this->session->unset_userdata("cart", $data);
         }
-        foreach ($subtotal as $subtotal) {
-            $subtotal_calc += $subtotal;
-        }
-
-        echo $cart_qtt . "$$" . $cart_total . "$$" . $already . "$$" . $subtotal_calc;
+        echo $cart_qtt . "$$" . number_format($cart_total, 2) . "$$" . $already . "$$" . number_format($subtotal_calc, 2);
     }
 
     public function process_shipping() {
@@ -812,7 +833,7 @@ class Customer_products extends My_Default {
         } else {
             foreach ($color_size_data as $color_size_data) {
                 if ($color_size_data->color_size_quantity > 0) {
-                    echo $color_size_data->color_size_quantity . " Items in stock$$" . $color_size_data->color_size_price . "$$" . $color_size_data->color_name . "$$" . $color_size_data->size_name;
+                    echo $color_size_data->color_size_quantity . " Items in stock$$" . money_format("%i", $color_size_data->color_size_price) . "$$" . $color_size_data->color_id . "$$" . $color_size_data->size_id;
                 } else {
                     echo "OUT OF STOCK";
                 }
