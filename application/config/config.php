@@ -17,8 +17,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | environments.
 |
 */
+$url = $_SERVER['SERVER_NAME'];
+if($url == "localhost")
+{
+    $config['base_url'] = 'http://localhost/mm-e-commerce/';
+}else{
 $config['base_url'] = 'https://5bucksla.com/';
-
+}
 
 
 
