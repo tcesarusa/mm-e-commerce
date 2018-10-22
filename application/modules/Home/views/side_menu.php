@@ -33,6 +33,8 @@
                                             <?php 
                                                         $this->db->where("product_id", $sidemenu->product_id);
                                                         $colors = $this->db->get("ip_colors")->result_object();
+                                                         if($sidemenu->product_sizerequired == "on")
+            {
                                                         if($colors != null && $sidemenu->product_quantity != 0) {
                                                         ?>
                                             <tr>
@@ -71,16 +73,20 @@
                                                 </td>
                                             
                                             </tr>
+
+                                            <?php } } ?>
                                             <tr id="quantity_product_tr_side_menu_<?php echo $sidemenu->product_id; ?>"><td style="border-top:0px;">Quantity</td><td style="border-top:0px;">
                                                     <input type="text" class="span2" style="width:85px;" value="1" name="quantity_product" id="quantity_product_side_menu_<?php echo $sidemenu->product_id; ?>">
                                                 </td></tr>
-                                            <?php } ?>
-                                            
                                         </table>
+            <?php if($sidemenu->product_sizerequired == "on")
+            { ?>
                                         <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $sidemenu->product_meta; ?>"> 
-                                            <i class="icon-zoom-in"></i></a> <?php if($colors != null && $sizes != null) { ?><a class="btn" id="add_cart_button_side_menu_<?php echo $sidemenu->product_id; ?>" onclick="cart_call_side_menu(<?php echo $sidemenu->product_id; ?>);"> Add to <i class="icon-shopping-cart"></i></a><span class="alert alert-danger" id="out_of_stock_side_menu_<?php echo $sidemenu->product_id; ?>" style="font-size:10px;" hidden>OUT OF STOCK</span> <?php }else { ?> <span class="alert alert-danger" style="font-size:10px;">OUT OF STOCK</span> <?php } ?>
-
-                                        
+                                            <i class="icon-zoom-in"></i></a> <?php if($colors != null && $sizes != null) { ?><a class="btn" id="add_cart_button_side_menu_<?php echo $sidemenu->product_id; ?>" onclick="cart_call_side_menu(<?php echo $sidemenu->product_id; ?>, '<?php echo $sidemenu->product_sizerequired; ?>', '<?php echo $sidemenu->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a><span class="alert alert-danger" id="out_of_stock_side_menu_<?php echo $sidemenu->product_id; ?>" style="font-size:10px;" hidden>OUT OF STOCK</span> <?php }else { ?> <span class="alert alert-danger" style="font-size:10px;">OUT OF STOCK</span> <?php } ?>
+            <?php } else { ?>
+                <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $sidemenu->product_meta; ?>">
+                    <i class="icon-zoom-in"></i></a><a class="btn" id="add_cart_button_side_menu_<?php echo $sidemenu->product_id; ?>" onclick="cart_call_side_menu(<?php echo $sidemenu->product_id; ?>, '<?php echo $sidemenu->product_sizerequired; ?>', '<?php echo $sidemenu->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a>
+            <?php } ?>
                                         <span class="btn btn-success" id="product_details_price_side_menu_<?php echo $sidemenu->product_id; ?>">$<?php echo money_format("%i", $sidemenu->product_price); ?></span></h4>
                 </div>
             </div><br/>

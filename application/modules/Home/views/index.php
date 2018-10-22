@@ -119,6 +119,10 @@
                                             <?php 
                                                         $this->db->where("product_id", $products->product_id);
                                                         $colors = $this->db->get("ip_colors")->result_object();
+
+
+                                                        if($products->product_sizerequired == "on")
+                                                        {
                                                         if($colors != null && $products->product_quantity != 0) {
                                                         ?>
                                             <tr>
@@ -157,16 +161,21 @@
                                                 </td>
                                             
                                             </tr>
+
+
+                                            <?php } } ?>
                                             <tr id="quantity_product_tr_<?php echo $products->product_id; ?>"><td style="border-top:0px;">Quantity</td><td style="border-top:0px;">
                                                     <input type="text" class="span2" style="width:85px;" value="1" name="quantity_product" id="quantity_product_<?php echo $products->product_id; ?>">
                                                 </td></tr>
-                                            <?php } ?>
-                                            
                                         </table>
-                                        
-                                        <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>"> 
-                                            <i class="icon-zoom-in"></i></a> <?php if($colors != null && $sizes != null) { ?><a class="btn" id="add_cart_button_<?php echo $products->product_id; ?>" onclick="cart_call(<?php echo $products->product_id; ?>);"> Add to <i class="icon-shopping-cart"></i></a><span class="alert alert-danger" id="out_of_stock_<?php echo $products->product_id; ?>" style="font-size:10px;" hidden>OUT OF STOCK</span> <?php }else { ?> <span class="alert alert-danger" style="font-size:10px;">OUT OF STOCK</span> <?php } ?>
-
+                                        <?php if($products->product_sizerequired == "on")
+                                                        { ?>
+                                        <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>">
+                                            <i class="icon-zoom-in"></i></a> <?php if($colors != null && $sizes != null) { ?><a class="btn" id="add_cart_button_<?php echo $products->product_id; ?>" onclick="cart_call(<?php echo $products->product_id; ?>, '<?php echo $products->product_sizerequired; ?>', '<?php echo $products->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a><span class="alert alert-danger" id="out_of_stock_<?php echo $products->product_id; ?>" style="font-size:10px;" hidden>OUT OF STOCK</span> <?php }else { ?> <span class="alert alert-danger" style="font-size:10px;">OUT OF STOCK</span> <?php } ?>
+<?php } else { ?>
+                                            <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>">
+                                                <i class="icon-zoom-in"></i></a> <a class="btn" id="add_cart_button_<?php echo $products->product_id; ?>" onclick="cart_call(<?php echo $products->product_id; ?>, '<?php echo $products->product_sizerequired; ?>', '<?php echo $products->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a>
+                                        <?php } ?>
                                         
                                         <span class="btn btn-success" id="product_details_price_<?php echo $products->product_id; ?>">$<?php echo money_format("%i", $products->product_price); ?></span>
                                         </div>

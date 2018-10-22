@@ -92,7 +92,7 @@ class Customer_sessions extends My_Default {
 
                     if (is_logged_in() == true) {
                         if ($this->input->post("cart") == 'cart') {
-                            redirect("Products/product_summary");
+                            redirect("Customer_products/product_summary");
                         } else {
                             redirect("Customer_dashboard");
                         }
@@ -154,7 +154,7 @@ class Customer_sessions extends My_Default {
 
                 if (is_logged_in() == true) {
                     if ($cart == 'cart') {
-                        redirect("Products/product_summary");
+                        redirect("Customer_products/product_summary");
                     } else {
                         redirect("Customer_dashboard");
                     }

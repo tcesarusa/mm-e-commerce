@@ -131,7 +131,7 @@
             //$("#design_tshirt").modal("toggle");
         }
         $("#shipping_rates_button").click();
-        update_color_size();
+        //update_color_size();
 
         if (search_url != 'personalized_tshirt') {
             webix.ready(function () {

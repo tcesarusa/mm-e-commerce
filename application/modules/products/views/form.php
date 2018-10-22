@@ -450,7 +450,7 @@ Video URL
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">No sizes required</div>
+                    <div class="panel-heading">Sizes are required</div>
                     <div class="panel-body">
 
                         <div class="form-group">
@@ -458,7 +458,7 @@ Video URL
                             if ($this->mdl_products->form_value('product_sizerequired', true) == "on") {
                                 echo "checked";
                             }
-?>> No sizes required
+?>> Require Sizes
                         </div>
 
                     </div>

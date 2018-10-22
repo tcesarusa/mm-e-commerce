@@ -11,7 +11,7 @@
         <!-- Other Less css file //different less files has different color scheam -->
         <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/simplex.less">
         <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/classified.less">
-        <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/amelia.less"> 
+        <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/amelia.less">
 
 <!--<link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/bootshop.less">
 <script src="<?php echo base_url(); ?>assets/themes/js/less.js" type="text/javascript"></script> -->
@@ -79,7 +79,7 @@ if ($this->session->userdata("remember_me")) {
                 </div>
                 <div class="alert alert-success" id="cart_alert" style="position:fixed; right:50px; top:40px; z-index:9999; margin-left:auto; margin-right:auto;" hidden>
                     <span class="closebtn" style="position:fixed; float:right; cursor:pointer; right:60px; font-size:12px; font-weight:bold;" title="Click to Close" onclick="this.parentElement.style.display = 'none';">X</span> 
-                    <span id="cart_alert_message"></span>
+                    <a href="<?php echo site_url();?>Customer_products/product_summary"><span id="cart_alert_message"></span></a>
                 </div>
                 <!-- Navbar ================================================== -->
                 <div id="logoArea" class="navbar">

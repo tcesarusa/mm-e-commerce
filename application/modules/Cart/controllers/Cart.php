@@ -24,6 +24,7 @@ class Cart extends My_Default {
                 }
                 $this->load->view("process_cart", $this->products);
             } else {
+                echo "here";
                 redirect('Customer_products/product_summary/error');
             }
         } else {
@@ -409,10 +410,14 @@ class Cart extends My_Default {
                 //INSERT INTO IP_INVOICE_ITEMS
                 if (isset($this->session->userdata("preview")['custom_front_' . $cart['product_id']])) {
                     $preview_src = $this->session->userdata("preview")['custom_front_' . $cart['product_id']]['file_name'];
+                }else{
+                    $preview_src = 0;
                 }
 
                 if (isset($this->session->userdata("preview")['custom_back_' . $cart['product_id']])) {
                     $preview_src_back = $this->session->userdata("preview")['custom_back_' . $cart['product_id']]['file_name'];
+                }else{
+                    $preview_src_back = 0;
                 }
                 if ($this->session->userdata("custom_tshirts") != null) {
                     foreach ($this->session->userdata("custom_tshirts") as $custom_tshirts) {
@@ -420,6 +425,8 @@ class Cart extends My_Default {
                             $custom_image = $custom_tshirts['file_name'];
                         }
                     }
+                }else{
+                    $custom_image = 0;
                 }
 
 
@@ -438,7 +445,7 @@ class Cart extends My_Default {
 
                 $this->db->insert("ip_invoice_items", $invoice_items);
                 $item_id = $this->db->insert_id();
-
+                if($this->session->userdata("custom_tshirts") != null) {
                 foreach ($this->session->userdata("custom_tshirts") as $t_shirts) {
 
 
@@ -462,15 +469,9 @@ class Cart extends My_Default {
                         $this->db->insert("5b_images", $b_images);
                     }
                 }
-                $this->db->where("color_name", $cart['color']);
-                $this->db->where("product_id", $cart['product_id']);
-                $color_id = $this->db->get("ip_colors")->result_object();
-                $color_id = $color_id[0]->color_id;
-
-                $this->db->where("size_name", $cart['size']);
-                $this->db->where("product_id", $cart['product_id']);
-                $size_id = $this->db->get("ip_sizes")->result_object();
-                $size_id = $size_id[0]->size_id;
+                }
+                $color_id = $cart['color_id'];
+                $size_id = $cart['size_id'];
 
                 $this->db->where("color_id", $color_id);
                 $this->db->where("size_id", $size_id);
