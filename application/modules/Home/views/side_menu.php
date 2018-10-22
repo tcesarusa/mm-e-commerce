@@ -7,7 +7,7 @@
     echo 0;
 } ?></span> Items in your cart  
             <span class="badge badge-warning pull-right" id="cart_price_left">$<?php if ($cart_total != 0) {
-    echo money_format("%i", $cart_total);
+    echo number_format($cart_total, 2);
 } else {
     echo 0;
 } ?></span></a></div>
@@ -87,7 +87,7 @@
                 <a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $sidemenu->product_meta; ?>">
                     <i class="icon-zoom-in"></i></a><a class="btn" id="add_cart_button_side_menu_<?php echo $sidemenu->product_id; ?>" onclick="cart_call_side_menu(<?php echo $sidemenu->product_id; ?>, '<?php echo $sidemenu->product_sizerequired; ?>', '<?php echo $sidemenu->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a>
             <?php } ?>
-                                        <span class="btn btn-success" id="product_details_price_side_menu_<?php echo $sidemenu->product_id; ?>">$<?php echo money_format("%i", $sidemenu->product_price); ?></span></h4>
+                                        <span class="btn btn-success" id="product_details_price_side_menu_<?php echo $sidemenu->product_id; ?>">$<?php echo number_format( $sidemenu->product_price, 2); ?></span></h4>
                 </div>
             </div><br/>
     <?php }
