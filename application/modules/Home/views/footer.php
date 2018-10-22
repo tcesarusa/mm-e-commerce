@@ -30,7 +30,7 @@
 
             </div> -->
         </div>
-        <p class="pull-right">&copy; 5BucksLA</p>
+        <p class="pull-right">&copy; MM-E-Commerce</p>
     </div><!-- Container End -->
 </div>
 <!-- Placed at the end of the document so the pages load faster ============================================= -->

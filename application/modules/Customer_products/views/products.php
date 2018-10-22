@@ -63,7 +63,7 @@
                             </div>
                             <div class="span3 alignR">
                                 <form class="form-horizontal qtyFrm">
-                                    <h3 id="small_price_<?php echo $products_small->product_id; ?>"> $<?php echo money_format("%i",$products_small->product_price); ?></h3>
+                                    <h3 id="small_price_<?php echo $products_small->product_id; ?>"> $<?php echo number_format($products_small->product_price, 2); ?></h3>
                                     
 
                                    <h4 style="text-align:center;" align="center">
@@ -130,7 +130,7 @@
 
                                                         <?php } ?>
                                         
-                                        <span class="btn btn-success" id="product_details_price_small_<?php echo $products_small->product_id; ?>">$<?php echo money_format("%i", $products_small->product_price); ?></span>
+                                        <span class="btn btn-success" id="product_details_price_small_<?php echo $products_small->product_id; ?>">$<?php echo number_format( $products_small->product_price, 2); ?></span>
                                     </h4>
 
                                 </form>
@@ -223,7 +223,7 @@
                                                             <i class="icon-zoom-in"></i></a><a class="btn" id="add_cart_button_<?php echo $products->product_id; ?>" onclick="cart_call(<?php echo $products->product_id; ?>,'<?php echo $products->product_sizerequired; ?>', '<?php echo $products->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a>
                                         <?php } ?>
                                         
-                                        <span class="btn btn-success" id="product_details_price_<?php echo $products->product_id; ?>">$<?php echo money_format("%i", $products->product_price); ?></span>
+                                        <span class="btn btn-success" id="product_details_price_<?php echo $products->product_id; ?>">$<?php echo number_format( $products->product_price, 2); ?></span>
                                                 </h4>
                                             </div>
                                         </div>

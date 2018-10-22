@@ -20,7 +20,7 @@
                                 <span style="display:inline-block; margin-left:10px;">
                                     <p><h4 style="color:#006dcc;"><?php echo $banners->product_name; ?></h4></p>
                                     <p><?php echo $banners->product_description; ?></p>
-                                    <p style="color:#5bb75b; font-size:30px; font-weight:bold;"><?php echo "$" . money_format("%i", $banners->product_price); ?></p>
+                                    <p style="color:#5bb75b; font-size:30px; font-weight:bold;"><?php echo "$" . number_format( $banners->product_price, 2); ?></p>
                                 </span>
                             </a>
 
@@ -75,7 +75,7 @@
                                                         <img src="<?php echo $products_featured_actives->product_image_thumb; ?>" title="<?php echo $products_featured_actives->product_name; ?>" alt="<?php echo $products_featured_actives->product_name; ?>"></a>
                                                     <div class="caption">
                                                         <h5><?php echo $products_featured_actives->product_name; ?></h5>
-                                                        <h4><a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products_featured_actives->product_meta; ?>" style="position:absolute; bottom:20px;">VIEW</a> <span class="pull-right" style="position:absolute; bottom:15px; right:10px;" align="right">$<?php echo money_format("%i", $products_featured_actives->product_price); ?></span></h4>
+                                                        <h4><a class="btn" href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products_featured_actives->product_meta; ?>" style="position:absolute; bottom:20px;">VIEW</a> <span class="pull-right" style="position:absolute; bottom:15px; right:10px;" align="right">$<?php echo number_format( $products_featured_actives->product_price, 2); ?></span></h4>
                                                     </div>
                                                 </div>
                                             </li>
@@ -177,7 +177,7 @@
                                                 <i class="icon-zoom-in"></i></a> <a class="btn" id="add_cart_button_<?php echo $products->product_id; ?>" onclick="cart_call(<?php echo $products->product_id; ?>, '<?php echo $products->product_sizerequired; ?>', '<?php echo $products->product_price; ?>');"> Add to <i class="icon-shopping-cart"></i></a>
                                         <?php } ?>
                                         
-                                        <span class="btn btn-success" id="product_details_price_<?php echo $products->product_id; ?>">$<?php echo money_format("%i", $products->product_price); ?></span>
+                                        <span class="btn btn-success" id="product_details_price_<?php echo $products->product_id; ?>">$<?php echo number_format( $products->product_price, 2); ?></span>
                                         </div>
                                     </h4>
                                     </div>
