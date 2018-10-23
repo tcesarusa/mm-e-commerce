@@ -107,7 +107,7 @@
                     <?php foreach ($latest_products as $products) { ?>
                         <li class="span3">
                             <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; height:390px;">
-                                <div class="card-header bg-primary text-light">
+                                <div class="card-header bg-success text-light">
                                     <h5><?php echo $products->product_name; ?></h5>
                                 </div>
                                 <div class="card-body" align="center">
