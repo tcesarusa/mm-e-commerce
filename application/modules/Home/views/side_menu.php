@@ -12,7 +12,7 @@
     echo "0.00";
 } ?></span></a></div>
     <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
-        <div class="card-header bg-primary text-light">
+        <div class="card-header bg-success text-light">
             <h5>Categories [ <?php echo $categories_quantity; ?> ]</h5>
         </div>
         <div class="card-body" style="padding:0px;">
@@ -26,7 +26,7 @@
         if ($sidemenu->product_sidemenu == 'on') {
             ?>
     <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; height:370px;">
-        <div class="card-header bg-primary text-light">
+        <div class="card-header bg-success text-light">
             <h6><?php echo $sidemenu->product_name; ?></h6>
         </div>
         <div class="card-body" align="center">
