@@ -6,14 +6,14 @@
             <!-- Sidebar ================================================== -->
             <?php $this->load->view("Home/side_menu"); ?>
             <!-- Sidebar end=============================================== -->
-            <div class="span9">
+            <div class="span8">
 
                 <?php if ($this->session->userdata("cart")) { ?>
                     <ul class="breadcrumb">
                         <li><a href="<?php echo site_url(); ?>">Home</a> <span class="divider">/</span></li>
                         <li class="active"> SHOPPING CART</li>
                     </ul>
-                    <h3>  SHOPPING CART [ <small><?php echo $cart_qtt; ?> </small>]<a href="<?php echo site_url(); ?>Customer_products" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+                    <h3>  SHOPPING CART [ <span style="color:green;" id="shopping_cart_qtt"><?php echo $cart_qtt; ?> </span> ]<a href="<?php echo site_url(); ?>Customer_products" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>
                     <hr class="soft"/>
 
                     <?php if($error == 'error') { ?>

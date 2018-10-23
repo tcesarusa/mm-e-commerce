@@ -6,7 +6,7 @@
             <!-- Sidebar ================================================== -->
             <?php $this->load->view("Home/side_menu"); ?>
             <!-- Sidebar end=============================================== -->
-            <div class="span9">
+            <div class="span8">
                 <ul class="breadcrumb">
                     <li><a href="<?php echo site_url(); ?>">Home</a> <span class="divider">/</span></li>
                     <li class="active">Products</li>
