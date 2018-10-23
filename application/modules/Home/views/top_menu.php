@@ -92,7 +92,7 @@ if ($this->session->userdata("remember_me")) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <div class="navbar-inner" style="background:#1e347b; border-radius:0px; box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
+                    <div class="navbar-inner" style="background:#1a873a; border-radius:0px; box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
                         <a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo "https://admin.5bucksla.com/uploads/$logo"; ?>"  style="width:150px;"/></a>
                         <form class="form-inline navbar-search" method="post" action="<?php echo site_url(); ?>Customer_products/show_products" >
                             <input class="form-control" name="search_bar" type="text" value="<?php
