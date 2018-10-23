@@ -35,11 +35,9 @@
 </div>
 <!-- Placed at the end of the document so the pages load faster ============================================= -->
 <style>
-
-    .dropdown-submenu {
-        position: relative;
+    body {
+        font-family: Verdana;
     }
-
     .dropdown-submenu .dropdown-menu {
         top: 0;
         left: 100%;

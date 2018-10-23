@@ -8,7 +8,7 @@
 <?php $this->load->view("Home/side_menu"); ?>
 <!-- Sidebar end=============================================== -->
 <?php foreach ($product_details as $product_details) { ?>
-<div class="span9">
+<div class="span8">
 <ul class="breadcrumb">
 <input type="hidden" name="product_id" id="product_id"  value="<?php echo $product_details->product_id; ?>">
 <?php
@@ -21,27 +21,27 @@ $categories = $this->db->get("ip_categories")->result_object();
 <div class="row">	  
 <div id="gallery" class="span3">
 <a href="<?php echo $product_details->product_image; ?>" title="<?php echo $product_details->product_name; ?>">
-<img src="<?php echo $product_details->product_image; ?>" style="width:100%;" title="<?php echo $product_details->product_name; ?>"/>
+<img src="<?php echo $product_details->product_image; ?>" style="width:100%;" class="img-thumbnail" title="<?php echo $product_details->product_name; ?>"/>
 </a>
 <div id="differentview" class="moreOptopm carousel slide">
 <div class="carousel-inner">
 <div class="item active" style='margin-top:10px;'>
     <?php if ($product_details->product_image2 != '') { ?>
-        <a href="<?php echo $product_details->product_image2; ?>"> <img style="width:29%; height:90px;" src="<?php echo $product_details->product_image2; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
+        <a href="<?php echo $product_details->product_image2; ?>"> <img style="width:29%; height:90px;" class="img-thumbnail" src="<?php echo $product_details->product_image2; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
     <?php } if ($product_details->product_image3 != '') { ?>
-        <a href="<?php echo $product_details->product_image3; ?>"> <img style="width:29%; height:90px;" src="<?php echo $product_details->product_image3; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
+        <a href="<?php echo $product_details->product_image3; ?>"> <img style="width:29%; height:90px;" class="img-thumbnail" src="<?php echo $product_details->product_image3; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
     <?php } if ($product_details->product_image4 != '') { ?>
-        <a href="<?php echo $product_details->product_image4; ?>" > <img style="width:29%; height:90px;" src="<?php echo $product_details->product_image4; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
+        <a href="<?php echo $product_details->product_image4; ?>" > <img style="width:29%; height:90px;" class="img-thumbnail" src="<?php echo $product_details->product_image4; ?>" title="<?php echo $product_details->product_name; ?>"/></a>
     <?php } ?>
 </div>
 
 </div>
 </div>
     <?php if($product_details->product_video_url != "") { ?>
-<iframe width="280" height="220" src="<?php echo $product_details->product_video_url; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+<iframe width="280" class="img-thumbnail" height="220" src="<?php echo $product_details->product_video_url; ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
     <?php } ?>
 </div>
-<div class="span6">
+<div class="span5">
 <h3><?php echo $product_details->product_name; ?></h3>
 <hr class="soft"/>
 <div class="control-group">
@@ -50,13 +50,14 @@ $categories = $this->db->get("ip_categories")->result_object();
 <span id="product_details_price">$<?php echo number_format($product_details->product_price, 2); ?></span></label>
 <?php if ($product_details->product_quantity > 0) { ?>
 <div class="controls">
-    <input type="number" class="span1" placeholder="Qty." value="1" id="quantity_product_details"/>
+    <input type="number" class="span1" placeholder="Qty." min="1" value="1" id="quantity_product_details"/>
 
     <button class="btn btn-large btn-primary pull-right" id="add_cart_product_details" onclick="add_cart_product_details(<?php echo $product_details->product_id; ?>, '<?php echo $product_details->product_sizerequired; ?>', '<?php echo $product_details->product_price; ?>');" <?php if($product_details->product_custom == 'on') { echo "disabled"; } ?> > Add to cart <i class=" icon-shopping-cart"></i></button>
 
 </div>
 <?php } ?>
 </div>
+    <br><br>
 <?php if($product_details->product_custom == 'on') { ?> 
 <form id="client_image_form" method="POST" enctype="multipart/form-data">
     Choose your own image for the stamp.<br>
@@ -64,7 +65,7 @@ $categories = $this->db->get("ip_categories")->result_object();
     <input type='hidden' name='product_id_image' value='<?php echo $product_details->product_id; ?>'>
     <input type="hidden" name="color_image_id" id="color_image_id"/>
     <input type="hidden" name="size_image_id" id="size_image_id"/>
-<input type='file' name='client_image' class='span9' id='client_image' style="width:300px;">
+<input type='file' name='client_image' class='span8' id='client_image' style="width:300px;">
 </form>
 
 <hr class="soft"/>
@@ -115,7 +116,7 @@ if($product_details->product_sizerequired == "on")
 <hr class="soft"/>
 </div>
 
-<div class="span9">
+<div class="span8">
 <ul id="productDetail" class="nav nav-tabs">
 <li class="active"><a href="#home" data-toggle="tab">Product Details</a></li>
 <li><a href="#profile" data-toggle="tab">Related Products</a></li>
@@ -152,7 +153,7 @@ if($product_details->product_sizerequired == "on")
             <hr class="soft"/>
             <div class="row">	  
                             <div class="span2">
-                                <img src="<?php echo $products_small->product_image; ?>" alt=""/>
+                                <img src="<?php echo $products_small->product_image; ?>" class="img-thumbnail"/>
                             </div>
                             <div class="span4">
                                 <h3><?php echo $products_small->product_name; ?></h3>			

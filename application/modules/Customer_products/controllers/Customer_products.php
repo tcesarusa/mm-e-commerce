@@ -381,6 +381,7 @@ class Customer_products extends My_Default {
         $cart_size = $this->input->post("cart_size");
         $color_name = "";
         $size_name = "";
+        $aux = 0;
         if($cart_color == -1 && $cart_size == -1)
         {
             $this->db->where("product_id", $product_id);
@@ -392,16 +393,6 @@ class Customer_products extends My_Default {
             $cart_color = -1;
             $cart_size = -1;
         }else{
-
-//        //GET COLOR_ID
-//        $this->db->where("product_id", $product_id);
-//        $this->db->where("color_name", $cart_color);
-//        $ip_colors_data = $this->db->get("ip_colors")->result_object();
-//
-//        //GET SIZE_ID
-//        $this->db->where("product_id", $product_id);
-//        $this->db->where("size_name", $cart_size);
-//        $ip_sizes_data = $this->db->get("ip_sizes")->result_object();
 
         //GET PRODUCT DIMENSIONS
         $this->db->join("ip_colors", "ip_colors.color_id = ip_color_sizes.color_id", "left");
@@ -491,7 +482,12 @@ class Customer_products extends My_Default {
         foreach ($this->session->userdata("cart") as $key => $cart_data) {
             $cart_qtt += $cart_data['product_quantity'];
             $cart_total += $cart_data['product_price'] * $cart_data['product_quantity'];
+            if($aux > 0) {
+            $subtotal_calc += $product_price * $cart_data['product_quantity'] - $product_price;
+            }else {
             $subtotal_calc += $product_price * $cart_data['product_quantity'];
+            }
+            $aux++;
         }
         $this->session->set_userdata("cart_qtt", $cart_qtt);
         $this->session->set_userdata("cart_total", $cart_total);

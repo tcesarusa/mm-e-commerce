@@ -68,7 +68,7 @@ function add_ship_cart(provider, service, rate, days)
 
 function add_cart(product_id, qtt, add, cart_color, cart_size, product_price)
 {
-    console.log("product_id:" + product_id + " qtt:" + qtt + " cart_color:" + cart_color + " cart_size:" + cart_size + " product_price:" + product_price);
+    //console.log("product_id:" + product_id + " qtt:" + qtt + " cart_color:" + cart_color + " cart_size:" + cart_size + " product_price:" + product_price);
     $("#calculating_cart").modal("toggle");
     $("#receive_shipping_price").html("$0.00");
     $.post(site_url + "Customer_products/add_cart",
@@ -81,8 +81,9 @@ function add_cart(product_id, qtt, add, cart_color, cart_size, product_price)
                 product_price: product_price
             }).done(function (data) {
         var cart_qtt = data.split("$$");
-        $("#cart_qtt_top").html(cart_qtt[0] + "<span style='color:orange;'> * NEW *</span>");
+        $("#cart_qtt_top").html(cart_qtt[0] + "<span style='color:white;'> * NEW *</span>");
         $("#cart_qtt_left").html(cart_qtt[0]);
+        $("#shopping_cart_qtt").html(cart_qtt[0]);
         $("#cart_price_top").html("$" + cart_qtt[1]);
         $("#cart_price_left").html("$" + cart_qtt[1]);
         $("#total_price_cart").html("$" + cart_qtt[1]);
@@ -113,14 +114,14 @@ function add_cart(product_id, qtt, add, cart_color, cart_size, product_price)
 
             if (add == '')
             {
-                $("#cart_alert_message").html("Item(s) has been added to your cart.");
+                //$("#cart_alert_message").html("Item(s) has been added to your cart.");
             } else
             {
-                $("#cart_alert_message").html("Item(s) has been " + add + " to your cart.");
+               //$("#cart_alert_message").html("Item(s) has been " + add + " to your cart.");
             }
 
         }
-        $("#cart_alert").show();
+        //$("#cart_alert").show();
         $("#close_calculation").click();
         $("#get_shipping_prices").submit();
         setTimeout(function () {

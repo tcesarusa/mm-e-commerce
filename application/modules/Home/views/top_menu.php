@@ -13,13 +13,12 @@
         <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/classified.less">
         <link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/amelia.less">
 
-<!--<link rel="stylesheet/less" type="text/css" href="<?php echo base_url(); ?>assets/themes/less/bootshop.less">
-<script src="<?php echo base_url(); ?>assets/themes/js/less.js" type="text/javascript"></script> -->
-
         <!-- Bootstrap style -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link id="callCss" rel="stylesheet" href="<?php echo base_url(); ?>assets/themes/bootshop/bootstrap.min.css" media="screen"/>
+
         <link href="<?php echo base_url(); ?>assets/themes/css/base.css" rel="stylesheet" media="screen"/>
-        <!-- Bootstrap style responsive -->	
+        <!-- Bootstrap style responsive -->
         <link href="<?php echo base_url(); ?>assets/themes/css/bootstrap-responsive.min.css" rel="stylesheet"/>
         <link href="<?php echo base_url(); ?>assets/themes/css/font-awesome.css" rel="stylesheet" type="text/css">
         <!-- Google-code-prettify -->	
@@ -36,7 +35,7 @@
     </head>
     <body>
 
-        <div id="header">
+        <div id="header" style="background:white;">
             <div class="container">
                 <div id="welcomeLine" class="row">
                     <div class="span6">
@@ -51,34 +50,39 @@ if ($this->session->userdata("remember_me")) {
                         <?php } ?>
                     </div>
 
-                    <div class="span6">
+                    <div class="span11">
                         <div class="pull-right">
                             <div style="font-weight:bold; display:inline-block; margin-right:5px;">
                             <a href="<?php echo site_url();?>Sales/return_policy">Return Policy</a> |
                             <a href="<?php echo site_url();?>Sales/terms_and_conditions">Terms and Conditions</a> |
-                            <a href="<?php echo site_url();?>Sales/privacy_policy">Privacy Policy</a> 
+                            <a href="<?php echo site_url();?>Sales/privacy_policy">Privacy Policy</a>
                             <a href="<?php echo site_url(); ?>Customer_products/product_summary"></a>
                             </div>
-                            <span class="btn btn-mini" id="cart_price_top">$<?php
-                                if ($cart_total != 0) {
-                                    echo money_format("%i", $cart_total);
-                                } else {
-                                    echo 0;
-                                }
-                                ?></span>
 
-                            <a href="<?php echo site_url(); ?>Customer_products/product_summary"><span class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ <span id="cart_qtt_top"><?php
+
+                            <a href="<?php echo site_url(); ?>Customer_products/product_summary" style="position:fixed; box-shadow: rgb(136, 136, 136) 3px 3px 3px; z-index:999; right:0; margin-right:5px;" class="btn btn-warning rounded-circle">
+                                <span style="padding:5px;"><i class="icon-shopping-cart icon-white"></i> [
+                                    <span id="cart_qtt_top" style="color:green;"><?php
                                         if ($cart_qtt != 0) {
                                             echo $cart_qtt;
                                         } else {
                                             echo 0;
                                         }
-                                        ?></span> ] Items in your cart </span> </a> 
+                                        ?></span> ]
+<!--                                    - <span class="" id="cart_price_top">$--><?php
+//                                        if ($cart_total != 0) {
+//                                            echo number_format( $cart_total, 2);
+//                                        } else {
+//                                            echo "0.00";
+//                                        }
+//                                        ?><!--</span>-->
+                                </span> </a>
                         </div>
                     </div>
                 </div>
+
                 <div class="alert alert-success" id="cart_alert" style="position:fixed; right:50px; top:40px; z-index:9999; margin-left:auto; margin-right:auto;" hidden>
-                    <span class="closebtn" style="position:fixed; float:right; cursor:pointer; right:60px; font-size:12px; font-weight:bold;" title="Click to Close" onclick="this.parentElement.style.display = 'none';">X</span> 
+                    <span class="closebtn" style="position:fixed; float:right; cursor:pointer; right:60px; font-size:12px; font-weight:bold;" title="Click to Close" onclick="this.parentElement.style.display = 'none';">X</span>
                     <a href="<?php echo site_url();?>Customer_products/product_summary"><span id="cart_alert_message"></span></a>
                 </div>
                 <!-- Navbar ================================================== -->
@@ -88,14 +92,14 @@ if ($this->session->userdata("remember_me")) {
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <div class="navbar-inner">
+                    <div class="navbar-inner" style="background:#1e347b; border-radius:0px; box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
                         <a class="brand" href="<?php echo base_url(); ?>"><img src="<?php echo "https://admin.5bucksla.com/uploads/$logo"; ?>"  style="width:150px;"/></a>
                         <form class="form-inline navbar-search" method="post" action="<?php echo site_url(); ?>Customer_products/show_products" >
-                            <input id="" class="form-control" name="search_bar" type="text" value="<?php
+                            <input class="form-control" name="search_bar" type="text" value="<?php
                             if (isset($search_term)) {
                                 echo $search_term;
                             }
-                            ?>" autofocus/>
+                            ?>" autofocus style="height:30px; margin-right:10px;" placeholder="Search Here"/>
 
                             <select class="srchTxt" name="category_search" id="category_search">
                                 <option value="all">All</option>
@@ -109,12 +113,12 @@ if ($this->session->userdata("remember_me")) {
                                     ?>><?php echo $top_categories->category_name; ?></option>
 
                                 <?php } ?>
-                            </select> 
+                            </select>
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
-                        <ul id="topMenu" class="nav pull-right">
+                        <ul id="topMenu" class="nav pull-right" >
                             <!--<li class=""><a href="<?php echo site_url(); ?>Customer_products/personalized_tshirt" style="color:orange; font-weight:bold;">Design your own Tee</a></li>-->
-                            <li class=""><a href="<?php echo site_url(); ?>Customer_products">All Products</a></li>
+                            <li class=""><a href="<?php echo site_url(); ?>Customer_products" >All Products</a></li>
                             <li class=""><a href="<?php echo site_url(); ?>Customer_products/special_offer">Special Offers</a></li>
                            <!-- <li class=""><a href="<?php echo site_url(); ?>Customer_products/normal">Delivery</a></li> -->
                             <li class=""><a href="<?php echo site_url(); ?>Customer_dashboard">Customer Dashboard</a></li>
@@ -124,12 +128,12 @@ if ($this->session->userdata("remember_me")) {
                                 <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Login</h3> 
+                                        <h3>Login</h3>
                                     </div>
                                     <div class="modal-body">
                                         <form class="form-horizontal loginFrm" method="post" action="<?php echo site_url(); ?>Customer_sessions/do_login">
                                             <div class="control-group" id="error_login" style="color:red;" hidden>Invalid Username or Password!</div>
-                                            <div class="control-group">	
+                                            <div class="control-group">
                                                 <input type="text" id="user_email" name="user_email" placeholder="Email" value="<?php
                                                 if ($remember == 1) {
                                                     echo $this->session->userdata("user_data")['email'];
@@ -150,7 +154,7 @@ if ($this->session->userdata("remember_me")) {
 
                                                 <button type="submit" class="btn btn-success">Sign in</button>
                                                 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-                                        </form>		
+                                        </form>
 
 
                                     </div>
@@ -159,7 +163,9 @@ if ($this->session->userdata("remember_me")) {
                         </ul>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
 

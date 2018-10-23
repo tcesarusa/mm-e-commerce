@@ -57,7 +57,7 @@
             </head>
 
 
-            <div class="span9" style='width:auto;'>
+            <div class="span8" style='width:auto;'>
                 <section id="typography" >
                     <div class="page-header">
                         <h1>Customizing T-Shirt <div class="pull-right" style='margin-left:10px;' align="" id="imageeditor">
