@@ -45,8 +45,7 @@ class Ebay extends Admin_Controller {
             "cert_id" => $sandbox ? "" : $ebay_cert_id,
             "auth_token" => $sandbox ? "" : $production_token
         );
-print_r($credentials);
-die();
+
         return $credentials;
     }
 
