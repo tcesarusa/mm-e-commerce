@@ -616,8 +616,8 @@ class Products extends Admin_Controller {
         }
         $products = $this->db->get("ip_products")->result_object();
         foreach ($products as $products) {
-
-            $image_name = str_replace("https://admin.5bucksla.com//uploads/products/images/", "", $products->product_image);
+        if($products->product_image != null){
+            $image_name = str_replace("https://admin.5bucksla.com/uploads/products/images/", "", $products->product_image);
 
             $config['image_library'] = 'gd2';
             $config['source_image'] = './uploads/products/images/' . $image_name;
@@ -637,6 +637,7 @@ class Products extends Admin_Controller {
             $this->db->set("product_image_thumb", 'https://admin.5bucksla.com//uploads/products/images/thumbs/' . $image_name);
             $this->db->where("product_id", $products->product_id);
             $this->db->update("ip_products");
+        }
         }
     }
 
