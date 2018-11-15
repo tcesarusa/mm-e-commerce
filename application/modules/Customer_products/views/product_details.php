@@ -15,8 +15,10 @@
 $this->db->where("category_id", $product_details->pcategory_id);
 $categories = $this->db->get("ip_categories")->result_object();
 ?>
+    <?php if($categories != null) { ?>
 <li><a href="<?php echo site_url(); ?>Customer_products/product_categories/<?php echo $categories[0]->category_meta; ?>"><?php echo $categories[0]->category_name; ?></a> <span class="divider">/</span></li>
-<li class="active" style="color:orange;"><?php echo $product_details->product_name; ?></li>
+<?php } ?>
+        <li class="active" style="color:orange;"><?php echo $product_details->product_name; ?></li>
 </ul>	
 <div class="row">	  
 <div id="gallery" class="span3">

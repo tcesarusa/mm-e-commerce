@@ -481,7 +481,8 @@ class Products extends Admin_Controller {
                 $sourcePath = $_FILES['product_image']['tmp_name'][$image_count]; // Storing source path of the file in a variable
 
                 $image = random_string('alnum', 16) . "_" . str_replace(" ", "-", $_FILES['product_image']['name'][$image_count]);
-                $targetPath = "/home3/atobla/admin_www/uploads/products/images/" . $image; // Target path where file is to be stored
+
+                $targetPath = FCPATH."uploads/products/images/" . $image; // Target path where file is to be stored
                 move_uploaded_file($sourcePath, $targetPath); // Moving Uploaded file
 
 
@@ -489,16 +490,16 @@ class Products extends Admin_Controller {
 
                 if ($image != '') {
                     if (@$product_data[0]->product_image == '') {
-                        $db_array['product_image'] = base_url() . "/uploads/products/images/" . $image;
+                        $db_array['product_image'] = base_url() . "uploads/products/images/" . $image;
                         @$product_data[0]->product_image = 1;
                     } else if (@$product_data[0]->product_image2 == '') {
-                        $db_array['product_image2'] = base_url() . "/uploads/products/images/" . $image;
+                        $db_array['product_image2'] = base_url() . "uploads/products/images/" . $image;
                         @$product_data[0]->product_image2 = 1;
                     } else if (@$product_data[0]->product_image3 == '') {
-                        $db_array['product_image3'] = base_url() . "/uploads/products/images/" . $image;
+                        $db_array['product_image3'] = base_url() . "uploads/products/images/" . $image;
                         $product_data[0]->product_image3 = 1;
                     } else if (@$product_data[0]->product_image4 == '') {
-                        $db_array['product_image4'] = base_url() . "/uploads/products/images/" . $image;
+                        $db_array['product_image4'] = base_url() . "uploads/products/images/" . $image;
                         @$product_data[0]->product_image4 = 1;
                     }
                     /* else
@@ -616,8 +617,9 @@ class Products extends Admin_Controller {
         }
         $products = $this->db->get("ip_products")->result_object();
         foreach ($products as $products) {
-        if($products->product_image != null){
-            $image_name = str_replace("https://admin.5bucksla.com/uploads/products/images/", "", $products->product_image);
+        if($products->product_image != ""){
+            echo $products->product_image."<br>";
+            $image_name = str_replace(base_url()."uploads/products/images/", "", $products->product_image);
 
             $config['image_library'] = 'gd2';
             $config['source_image'] = './uploads/products/images/' . $image_name;
@@ -630,11 +632,12 @@ class Products extends Admin_Controller {
             $this->image_lib->initialize($config);
             if (!$this->image_lib->resize()) {
                 echo $this->image_lib->display_errors();
+                die();
             }
             $image_name = str_replace(".png", "_thumb.png", $image_name);
             $image_name = str_replace(".JPG", "_thumb.JPG", $image_name);
             $image_name = str_replace(".jpg", "_thumb.jpg", $image_name);
-            $this->db->set("product_image_thumb", 'https://admin.5bucksla.com//uploads/products/images/thumbs/' . $image_name);
+            $this->db->set("product_image_thumb", base_url().'/uploads/products/images/thumbs/' . $image_name);
             $this->db->where("product_id", $products->product_id);
             $this->db->update("ip_products");
         }
