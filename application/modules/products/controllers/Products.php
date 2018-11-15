@@ -202,7 +202,7 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '</ReviseItemRequest>';
 
 
-        echo $requestXmlBody;
+//        echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
         $session = new eBaySession($userToken, $devID, $appID, $certID, $serverUrl, $compatabilityLevel, $siteID, $verb);
 
