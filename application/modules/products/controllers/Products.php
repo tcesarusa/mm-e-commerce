@@ -618,7 +618,6 @@ class Products extends Admin_Controller {
         $products = $this->db->get("ip_products")->result_object();
         foreach ($products as $products) {
         if($products->product_image != ""){
-            echo $products->product_image."<br>";
             $image_name = str_replace(base_url()."uploads/products/images/", "", $products->product_image);
 
             $config['image_library'] = 'gd2';
