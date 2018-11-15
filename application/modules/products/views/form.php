@@ -13,7 +13,9 @@
             <?php echo "NOT SUBMITED";
         } else {
             echo "<a href='https://www.ebay.com/itm/" . $this->mdl_products->form_value('ebay_id') . "' target='_blank'>" . $this->mdl_products->form_value('ebay_id') . "</a>";
-        } ?>
+      ?>
+        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>">Revise Listing</a>
+        <?php } ?>
 <?php $this->layout->load_view('layout/header_buttons'); ?>
         <br><b>Check on Website: </b>
         <a align="right" href="<?php echo site_url()."Customer_products/product_details/" . $this->mdl_products->form_value('product_meta'); ?>" target="_blank"><?php echo $this->mdl_products->form_value('product_id'); ?></a>
@@ -631,6 +633,14 @@ foreach ($colors as $colors1) {
 
 </form>
 <script type="text/javascript">
+    function ReviseEbay(product_id)
+    {
+        $.post("<?php echo site_url(); ?>Products/ReviseEbayItem", {
+            product_id:product_id
+        }, function(data){
+            console.log(data);
+        });
+    }
     function remove_all()
     {
         $.post("<?php echo site_url(); ?>/products/ajax/remove_all_quantities",

@@ -53,6 +53,285 @@ class Products extends Admin_Controller {
         $this->db->insert("ip_categories", $category);
     }
 
+    public function ReviseEbayItem()
+    {
+        require(APPPATH . 'third_party/keys.php');
+        require(APPPATH . 'third_party/eBaySession.php');
+        $product_id = $this->input->post("product_id");
+        $this->db->where("product_id", $product_id);
+        $product_data = $this->db->get("ip_products")->row();
+
+
+        $img_name = array();
+
+
+
+        $img_name[] = $product_data->product_image;
+        if($product_data->product_image2 != null){
+            $img_name[] = $product_data->product_image2;
+        }
+        if($product_data->product_image3 != null){
+            $img_name[] = $product_data->product_image3;
+        }
+        if($product_data->product_image4 != null){
+            $img_name[] = $product_data->product_image4;
+        }
+
+        //check
+        ini_set('magic_quotes_gpc', false);    // magic quotes will only confuse things like escaping apostrophe
+        //Get the item entered
+        $listingType = "FixedPriceItem";
+        $primaryCategory = $product_data->ebay_category_id;
+        $itemTitle = $product_data->ebay_title;
+        $startPrice = $product_data->ebay_price;
+        $shippingservice = "USPSPriority";
+        //$buyItNowPrice   = $_POST['buyItNowPrice'];
+        $listingDuration = "GTC";
+        $freeshipping = $product_data->product_free_shipping;
+        if ($freeshipping == "" || $freeshipping == null) {
+            $freeshipping = "true";
+        }
+        //$safequery = $_POST['searched_keyword'];
+
+        if (get_magic_quotes_gpc()) {
+            // print "stripslashes!!! <br>\n";
+            $itemDescription = stripslashes($product_data->ebay_description);
+        } else {
+            $itemDescription = $product_data->ebay_description;
+        }
+        $itemDescription = $product_data->ebay_description;
+        $itemCondition = $product_data->product_condition;
+        $brand = $product_data->provider_name;
+        $mpn = $product_data->product_mpn;
+        $size_mens = "Large";
+        $style = "Basic Tee";
+        $size_type = "Regular";
+        $sleeve_style = "Short Sleeve";
+        $siteID = 0;
+        $color = $product_data->product_color;
+        $sizes = $product_data->product_size;
+        //the call being made:
+        $verb = 'AddItem';
+
+        /* if ($listingType == 'FixedPriceItem') {
+          $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
+          } */
+        $returnWithin = "Days_30";
+        $returnsAccepted = "ReturnsAccepted";
+        //$quantity = $product_data->product_quantity;
+        $quantity = 1;
+
+        ///Build the request Xml string
+        $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
+        $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
+        $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
+        $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
+        $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
+        $requestXmlBody .= '<Item>';
+        $requestXmlBody .= "<ItemSpecifics>";
+        $requestXmlBody .= "<NameValueList>
+        <Name>Brand</Name>
+        <Value>$brand</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Style</Name>
+        <Value>$style</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Size Type</Name>
+        <Value>$size_type</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Sleeve Style</Name>
+        <Value>$sleeve_style</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Color</Name>
+        <Value>$color</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Size</Name>
+        <Value>$sizes</Value>
+      </NameValueList>";
+        $requestXmlBody .= "</ItemSpecifics>";
+        $requestXmlBody .= "<ProductListingDetails>";
+        $requestXmlBody .= "<BrandMPN> BrandMPNType
+          <Brand> $brand </Brand>
+          <MPN> $mpn </MPN>
+        </BrandMPN>";
+        $requestXmlBody .= "<UPC>Does not apply</UPC>";
+        $requestXmlBody .= "</ProductListingDetails>";
+        $requestXmlBody .= '<ConditionID>' . $itemCondition . '</ConditionID>';
+        $requestXmlBody .= '<Site>eBayMotors</Site>';
+        $requestXmlBody .= '<PrimaryCategory>';
+        $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
+        $requestXmlBody .= '</PrimaryCategory>';
+        $requestXmlBody .= '<BestOfferDetails>';
+        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
+        $requestXmlBody .= '</BestOfferDetails>';
+        $requestXmlBody .= '<PictureDetails>';
+        //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
+        foreach ($img_name as $img_name) {
+            //$requestXmlBody .= '<PictureURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</PictureURL>';
+            $requestXmlBody .= '<PictureURL>';
+            $requestXmlBody .= $img_name;
+            $requestXmlBody .= '</PictureURL>';
+        }
+
+        $requestXmlBody .= '</PictureDetails>';
+        //$requestXmlBody .= "<BuyItNowPrice currencyID=\"EUR\">$buyItNowPrice</BuyItNowPrice>";
+        $requestXmlBody .= '<Country>US</Country>';
+        $requestXmlBody .= '<Currency>USD</Currency>';
+        $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
+        $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
+        $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
+        $requestXmlBody .= '<Location><![CDATA[Hawthorne, CA]]></Location>';
+        $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
+        $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
+        $requestXmlBody .= "<Quantity>$quantity</Quantity>";
+        //$requestXmlBody .= '<RegionID>77</RegionID>';
+        $requestXmlBody .= "<StartPrice>$startPrice</StartPrice>";
+        $requestXmlBody .= '<ShippingTermsInDescription>True</ShippingTermsInDescription>';
+        $requestXmlBody .= "<Title><![CDATA[$itemTitle]]></Title>";
+        $requestXmlBody .= "<Description><![CDATA[$itemDescription]]></Description>";
+        $requestXmlBody .= '<ReturnPolicy>';
+        $requestXmlBody .= '<ReturnsAcceptedOption>' . $returnsAccepted . '</ReturnsAcceptedOption>';
+        $requestXmlBody .= '<ReturnsWithinOption>' . $returnWithin . '</ReturnsWithinOption>';
+        $requestXmlBody .= '</ReturnPolicy>';
+        $requestXmlBody .= '<ShippingPackageDetails>
+          <MeasurementUnit>English</MeasurementUnit>
+          <PackageDepth>9</PackageDepth>
+          <PackageLength>1</PackageLength>
+          <PackageWidth>8</PackageWidth>
+          <ShippingIrregular>true</ShippingIrregular>
+          <WeightMajor>0</WeightMajor>
+          <WeightMinor>1</WeightMinor>
+        </ShippingPackageDetails>';
+        $requestXmlBody .= '<ShippingDetails>';
+        $requestXmlBody .= '<ShippingType>Flat</ShippingType>';
+        $requestXmlBody .= '<ShippingServiceOptions>';
+        $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
+        $requestXmlBody .= '<ShippingServiceAdditionalCost currencyID="USD">0</ShippingServiceAdditionalCost>';
+        $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
+        $requestXmlBody .= '<ShippingServicePriority>1</ShippingServicePriority>';
+        $requestXmlBody .= '<ShippingService>' . $shippingservice . '</ShippingService>';
+        $requestXmlBody .= '</ShippingServiceOptions>';
+        $requestXmlBody .= '</ShippingDetails>';
+        $requestXmlBody .= '</Item>';
+        $requestXmlBody .= '</ReviseItemRequest>';
+
+        //echo $requestXmlBody;
+        //Create a new eBay session with all details pulled in from included keys.php
+        $session = new eBaySession($userToken, $devID, $appID, $certID, $serverUrl, $compatabilityLevel, $siteID, $verb);
+
+        //send the request and get response
+        $responseXml = $session->sendHttpRequest($requestXmlBody);
+        if (stristr($responseXml, 'HTTP 404') || $responseXml == '')
+            die('<P>Error sending request');
+
+        //Xml string is parsed and creates a DOM Document object
+        $responseDoc = new DomDocument();
+        $responseDoc->loadXML($responseXml);
+        //get any error nodes
+        $errors = $responseDoc->getElementsByTagName('Errors');
+
+        //if there are error nodes
+        if ($errors->length > 0) {
+            $responses = $responseDoc->getElementsByTagName("AddItemResponse");
+            $itemID = "";
+            foreach ($responses as $response) {
+                $acks = $response->getElementsByTagName("Ack");
+                $ack = $acks->item(0)->nodeValue;
+                echo "Ack = $ack <BR />\n";   // Success if successful
+                if($ack == "Success"){
+                    $endTimes = $response->getElementsByTagName("EndTime");
+                    $endTime = $endTimes->item(0)->nodeValue;
+                    echo "endTime = $endTime <BR />\n";
+
+                    $itemIDs = $response->getElementsByTagName("ItemID");
+                    $itemID = @$itemIDs->item(0)->nodeValue;
+                    echo "itemID = $itemID <BR />\n";
+
+                    $linkBase = "http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=";
+                    echo "<a href=$linkBase" . $itemID . ">$itemTitle</a> <BR />";
+
+                    $feeNodes = $responseDoc->getElementsByTagName('Fee');
+                    foreach ($feeNodes as $feeNode) {
+                        $feeNames = $feeNode->getElementsByTagName("Name");
+                        if ($feeNames->item(0)) {
+                            $feeName = $feeNames->item(0)->nodeValue;
+                            $fees = $feeNode->getElementsByTagName('Fee');  // get Fee amount nested in Fee
+                            $fee = $fees->item(0)->nodeValue;
+                            if ($fee > 0.0) {
+                                if ($feeName == 'ListingFee') {
+                                    printf("<B>$feeName : %.2f </B><BR>\n", $fee);
+                                } else {
+                                    printf("$feeName : %.2f <BR>\n", $fee);
+                                }
+                            }  // if $fee > 0
+                        } // if feeName
+                    } // foreach $feeNode
+                }else{
+                    print_r($response);
+                    $itemIDs = $response->getElementsByTagName("ItemID");
+                    $itemID = @$itemIDs->item(0)->nodeValue;
+                }
+            }
+            //echo 'item updated';
+            echo '<P><B>eBay returned the following error(s):</B>';
+            //display each error
+            //Get error code, ShortMesaage and LongMessage
+            $code = $errors->item(0)->getElementsByTagName('ErrorCode');
+            $shortMsg = $errors->item(0)->getElementsByTagName('ShortMessage');
+            $longMsg = $errors->item(0)->getElementsByTagName('LongMessage');
+            //Display code and shortmessage
+            echo '<P>', $code->item(0)->nodeValue, ' : ', str_replace(">", "&gt;", str_replace("<", "&lt;", $shortMsg->item(0)->nodeValue));
+            //if there is a long message (ie ErrorLevel=1), display it
+            if (count($longMsg) > 0)
+                echo '<BR>', str_replace(">", "&gt;", str_replace("<", "&lt;", $longMsg->item(0)->nodeValue));
+        } else { //no errors
+            //get results nodes
+            $responses = $responseDoc->getElementsByTagName("AddItemResponse");
+            $itemID = "";
+            foreach ($responses as $response) {
+                $acks = $response->getElementsByTagName("Ack");
+                $ack = $acks->item(0)->nodeValue;
+                echo "Ack = $ack <BR />\n";   // Success if successful
+
+                $endTimes = $response->getElementsByTagName("EndTime");
+                $endTime = $endTimes->item(0)->nodeValue;
+                echo "endTime = $endTime <BR />\n";
+
+                $itemIDs = $response->getElementsByTagName("ItemID");
+                $itemID = $itemIDs->item(0)->nodeValue;
+                echo "itemID = $itemID <BR />\n";
+
+                $linkBase = "http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=";
+                echo "<a href=$linkBase" . $itemID . ">$itemTitle</a> <BR />";
+
+                $feeNodes = $responseDoc->getElementsByTagName('Fee');
+                foreach ($feeNodes as $feeNode) {
+                    $feeNames = $feeNode->getElementsByTagName("Name");
+                    if ($feeNames->item(0)) {
+                        $feeName = $feeNames->item(0)->nodeValue;
+                        $fees = $feeNode->getElementsByTagName('Fee');  // get Fee amount nested in Fee
+                        $fee = $fees->item(0)->nodeValue;
+                        if ($fee > 0.0) {
+                            if ($feeName == 'ListingFee') {
+                                printf("<B>$feeName : %.2f </B><BR>\n", $fee);
+                            } else {
+                                printf("$feeName : %.2f <BR>\n", $fee);
+                            }
+                        }  // if $fee > 0
+                    } // if feeName
+                } // foreach $feeNode
+            } // foreach response
+            //Insert into Database
+            $xml = simplexml_load_string($responseXml);
+        } // if $errors->length > 0
+    }
+
     public function AddEbayItem() {
         require(APPPATH . 'third_party/keys.php');
         require(APPPATH . 'third_party/eBaySession.php');
