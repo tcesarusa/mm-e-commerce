@@ -65,15 +65,14 @@ class Products extends Admin_Controller {
         $img_name = array();
 
 
-
         $img_name[] = $product_data->product_image;
-        if($product_data->product_image2 != null){
+        if ($product_data->product_image2 != null) {
             $img_name[] = $product_data->product_image2;
         }
-        if($product_data->product_image3 != null){
+        if ($product_data->product_image3 != null) {
             $img_name[] = $product_data->product_image3;
         }
-        if($product_data->product_image4 != null){
+        if ($product_data->product_image4 != null) {
             $img_name[] = $product_data->product_image4;
         }
 
@@ -128,22 +127,22 @@ class Products extends Admin_Controller {
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>';
         $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
         $requestXmlBody .= '<Item>
-    <BuyItNowPrice currencyID="USD"> '.$startPrice.' </BuyItNowPrice>
-    <ConditionDescription> '.$condition_description.' </ConditionDescription>
-    <ConditionID> '.$itemCondition.' </ConditionID>
+    <BuyItNowPrice currencyID="USD"> ' . $startPrice . ' </BuyItNowPrice>
+    <ConditionDescription> ' . $condition_description . ' </ConditionDescription>
+    <ConditionID> ' . $itemCondition . ' </ConditionID>
     <Country>US</Country>
     
-    <Description> '.$itemDescription.' </Description>
+    <Description> ' . $itemDescription . ' </Description>
     <DescriptionReviseMode> Replace </DescriptionReviseMode>
     <DispatchTimeMax> 1 </DispatchTimeMax>
-    <ItemID>'.$ebay_id.'</ItemID>
+    <ItemID>' . $ebay_id . '</ItemID>
     <ListingDesigner> ListingDesignerType
       <LayoutID> 10000 </LayoutID>
       <ThemeID> 10 </ThemeID>
     </ListingDesigner>
     <ListingDuration> GTC </ListingDuration>
     <PaymentMethods> PayPal </PaymentMethods>
-    <PayPalEmailAddress> '.$paypalEmailAddress.' </PayPalEmailAddress>';
+    <PayPalEmailAddress> ' . $paypalEmailAddress . ' </PayPalEmailAddress>';
         $requestXmlBody .= '<PictureDetails>';
 
         foreach ($img_name as $img_name) {
@@ -154,18 +153,18 @@ class Products extends Admin_Controller {
         }
 
         $requestXmlBody .= '</PictureDetails>';
-        $requestXmlBody .='<PostalCode> 93306 </PostalCode>
+        $requestXmlBody .= '<PostalCode> 93306 </PostalCode>
     <PrimaryCategory>
-      <CategoryID> '.$primaryCategory.' </CategoryID>
+      <CategoryID> ' . $primaryCategory . ' </CategoryID>
     </PrimaryCategory>
     <ProductListingDetails> 
       <BrandMPN> 
-        <Brand> '.$brand.' </Brand>
-        <MPN> '.$mpn.' </MPN>
+        <Brand> ' . $brand . ' </Brand>
+        <MPN> ' . $mpn . ' </MPN>
       </BrandMPN>
-      <UPC>'.$upc.'</UPC>
+      <UPC>' . $upc . '</UPC>
     </ProductListingDetails>
-    <Quantity>'.$quantity.'</Quantity>
+    <Quantity>' . $quantity . '</Quantity>
     <ReturnPolicy>';
         $requestXmlBody .= '<ReturnsAcceptedOption>' . $returnsAccepted . '</ReturnsAcceptedOption>';
         $requestXmlBody .= '<ReturnsWithinOption>' . $returnWithin . '</ReturnsWithinOption>';
@@ -190,14 +189,13 @@ class Products extends Admin_Controller {
           <WeightMinor>1</WeightMinor>
     </ShippingPackageDetails>
     <ShippingTermsInDescription> True </ShippingTermsInDescription>
-    <StartPrice currencyID="USD">'.$startPrice.'</StartPrice>
+    <StartPrice currencyID="USD">' . $startPrice . '</StartPrice>
     
     
-    <Title><![CDATA['.$itemTitle.']]> </Title>
+    <Title><![CDATA[' . $itemTitle . ']]> </Title>
   </Item>';
 
         $requestXmlBody .= '</ReviseItemRequest>';
-
 
 
         echo $requestXmlBody;
@@ -223,7 +221,7 @@ class Products extends Admin_Controller {
                 $acks = $response->getElementsByTagName("Ack");
                 $ack = $acks->item(0)->nodeValue;
                 echo "Ack = $ack <BR />\n";   // Success if successful
-                if($ack == "Success"){
+                if ($ack == "Success") {
                     $endTimes = $response->getElementsByTagName("EndTime");
                     $endTime = $endTimes->item(0)->nodeValue;
                     echo "endTime = $endTime <BR />\n";
@@ -251,7 +249,7 @@ class Products extends Admin_Controller {
                             }  // if $fee > 0
                         } // if feeName
                     } // foreach $feeNode
-                }else{
+                } else {
                     print_r($response);
                     $itemIDs = $response->getElementsByTagName("ItemID");
                     $itemID = @$itemIDs->item(0)->nodeValue;
@@ -381,7 +379,7 @@ class Products extends Admin_Controller {
 
         ///Build the request Xml string
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
-        $requestXmlBody .= '<AddFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= '<AddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
         $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
         $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
@@ -425,6 +423,9 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<PrimaryCategory>';
         $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
         $requestXmlBody .= '</PrimaryCategory>';
+        $requestXmlBody .= '<BestOfferDetails>';
+        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
+        $requestXmlBody .= '</BestOfferDetails>';
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
@@ -474,7 +475,7 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
         $requestXmlBody .= '</Item>';
-        $requestXmlBody .= '</AddFixedPriceItemRequest>';
+        $requestXmlBody .= '</AddItemRequest>';
 
         //echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
