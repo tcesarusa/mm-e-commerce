@@ -126,6 +126,10 @@ class Products extends Admin_Controller {
         ///Build the request Xml string
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>';
         $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
+        $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
+        $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
+        $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
         $requestXmlBody .= '<Item>
     <BuyItNowPrice currencyID="USD">' . $startPrice . '</BuyItNowPrice>
     <ConditionDescription>' . $condition_description . '</ConditionDescription>
