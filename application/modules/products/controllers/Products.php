@@ -101,6 +101,7 @@ class Products extends Admin_Controller {
         }
         $itemDescription = $product_data->ebay_description;
         $itemCondition = $product_data->product_condition;
+        $ebay_id = $product_data->ebay_id;
         $brand = $product_data->provider_name;
         $mpn = $product_data->product_mpn;
         $size_mens = "Large";
@@ -129,47 +130,9 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
         $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
         $requestXmlBody .= '<Item>';
-        $requestXmlBody .= "<ItemSpecifics>";
-        $requestXmlBody .= "<NameValueList>
-        <Name>Brand</Name>
-        <Value>$brand</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Style</Name>
-        <Value>$style</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Size Type</Name>
-        <Value>$size_type</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Sleeve Style</Name>
-        <Value>$sleeve_style</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Color</Name>
-        <Value>$color</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Size</Name>
-        <Value>$sizes</Value>
-      </NameValueList>";
-        $requestXmlBody .= "</ItemSpecifics>";
-        $requestXmlBody .= "<ProductListingDetails>";
-        $requestXmlBody .= "<BrandMPN> BrandMPNType
-          <Brand> $brand </Brand>
-          <MPN> $mpn </MPN>
-        </BrandMPN>";
-        $requestXmlBody .= "<UPC>Does not apply</UPC>";
-        $requestXmlBody .= "</ProductListingDetails>";
-        $requestXmlBody .= '<ConditionID>' . $itemCondition . '</ConditionID>';
-        $requestXmlBody .= '<Site>eBayMotors</Site>';
-        $requestXmlBody .= '<PrimaryCategory>';
-        $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
-        $requestXmlBody .= '</PrimaryCategory>';
-        $requestXmlBody .= '<BestOfferDetails>';
-        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
-        $requestXmlBody .= '</BestOfferDetails>';
+        $requestXmlBody .= "<ItemID>$ebay_id</ItemID>";
+        $requestXmlBody .= "<Description>$itemDescription</Description>";
+        $requestXmlBody .= "<DescriptionReviseMode>Replace</DescriptionReviseMode> ";
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
@@ -181,9 +144,6 @@ class Products extends Admin_Controller {
 
         $requestXmlBody .= '</PictureDetails>';
         //$requestXmlBody .= "<BuyItNowPrice currencyID=\"EUR\">$buyItNowPrice</BuyItNowPrice>";
-        $requestXmlBody .= '<Country>US</Country>';
-        $requestXmlBody .= '<Currency>USD</Currency>';
-        $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
         $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
         $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
         $requestXmlBody .= '<Location><![CDATA[Hawthorne, CA]]></Location>';
