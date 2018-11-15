@@ -273,6 +273,8 @@ class Products extends Admin_Controller {
                 } // foreach $feeNode
                 }else{
                     print_r($response);
+                    $itemIDs = $response->getElementsByTagName("ItemID");
+                    $itemID = @$itemIDs->item(0)->nodeValue;
                 }
             }
             //echo 'item updated';
