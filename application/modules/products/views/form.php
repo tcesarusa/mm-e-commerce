@@ -635,7 +635,7 @@ foreach ($colors as $colors1) {
 <script type="text/javascript">
     function ReviseEbay(product_id)
     {
-        $.post("<?php echo site_url(); ?>Products/ReviseEbayItem", {
+        $.post("<?php echo site_url(); ?>products/Products/ReviseEbayItem", {
             product_id:product_id
         }, function(data){
             console.log(data);
