@@ -101,7 +101,9 @@ class Products extends Admin_Controller {
         }
         $itemDescription = $product_data->ebay_description;
         $itemCondition = $product_data->product_condition;
+        $condition_description = $product_data->product_condition_description;
         $ebay_id = $product_data->ebay_id;
+        $upc = $product_data->sku;
         $brand = $product_data->provider_name;
         $mpn = $product_data->product_mpn;
         $size_mens = "Large";
@@ -113,7 +115,7 @@ class Products extends Admin_Controller {
         $sizes = $product_data->product_size;
         //the call being made:
         $verb = 'AddItem';
-
+        $paypalEmailAddress = 'tcesarusa@gmail.com';
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
           } */
@@ -123,52 +125,52 @@ class Products extends Admin_Controller {
         $quantity = 1;
 
         ///Build the request Xml string
-        $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
+        $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>';
         $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
-        $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
-        $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
-        $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
-        $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
-        $requestXmlBody .= '<Item>';
-        $requestXmlBody .= "<ItemID>$ebay_id</ItemID>";
-        $requestXmlBody .= "<Description>$itemDescription</Description>";
-        $requestXmlBody .= "<DescriptionReviseMode>Replace</DescriptionReviseMode> ";
+        $requestXmlBody .= '<Item>
+    <BuyItNowPrice currencyID="USD"> '.$startPrice.' </BuyItNowPrice>
+    <ConditionDescription> '.$condition_description.' </ConditionDescription>
+    <ConditionID> '.$itemCondition.' </ConditionID>
+    <Country>US</Country>
+    
+    <Description> '.$itemDescription.' </Description>
+    <DescriptionReviseMode> Replace </DescriptionReviseMode>
+    <DispatchTimeMax> 1 </DispatchTimeMax>
+    <ItemID>'.$ebay_id.'</ItemID>
+    <ListingDesigner> ListingDesignerType
+      <LayoutID> 10000 </LayoutID>
+      <ThemeID> 10 </ThemeID>
+    </ListingDesigner>
+    <ListingDuration> GTC </ListingDuration>
+    <PaymentMethods> PayPal </PaymentMethods>
+    <PayPalEmailAddress> '.$paypalEmailAddress.' </PayPalEmailAddress>';
         $requestXmlBody .= '<PictureDetails>';
-        //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
+
         foreach ($img_name as $img_name) {
-            //$requestXmlBody .= '<PictureURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</PictureURL>';
+
             $requestXmlBody .= '<PictureURL>';
             $requestXmlBody .= $img_name;
             $requestXmlBody .= '</PictureURL>';
         }
 
         $requestXmlBody .= '</PictureDetails>';
-        //$requestXmlBody .= "<BuyItNowPrice currencyID=\"EUR\">$buyItNowPrice</BuyItNowPrice>";
-        $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
-        $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
-        $requestXmlBody .= '<Location><![CDATA[Hawthorne, CA]]></Location>';
-        $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
-        $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
-        $requestXmlBody .= "<Quantity>$quantity</Quantity>";
-        //$requestXmlBody .= '<RegionID>77</RegionID>';
-        $requestXmlBody .= "<StartPrice>$startPrice</StartPrice>";
-        $requestXmlBody .= '<ShippingTermsInDescription>True</ShippingTermsInDescription>';
-        $requestXmlBody .= "<Title><![CDATA[$itemTitle]]></Title>";
-        $requestXmlBody .= "<Description><![CDATA[$itemDescription]]></Description>";
-        $requestXmlBody .= '<ReturnPolicy>';
+        $requestXmlBody .='<PostalCode> 93306 </PostalCode>
+    <PrimaryCategory>
+      <CategoryID> '.$primaryCategory.' </CategoryID>
+    </PrimaryCategory>
+    <ProductListingDetails> 
+      <BrandMPN> 
+        <Brand> '.$brand.' </Brand>
+        <MPN> '.$mpn.' </MPN>
+      </BrandMPN>
+      <UPC>'.$upc.'</UPC>
+    </ProductListingDetails>
+    <Quantity>'.$quantity.'</Quantity>
+    <ReturnPolicy>';
         $requestXmlBody .= '<ReturnsAcceptedOption>' . $returnsAccepted . '</ReturnsAcceptedOption>';
         $requestXmlBody .= '<ReturnsWithinOption>' . $returnWithin . '</ReturnsWithinOption>';
-        $requestXmlBody .= '</ReturnPolicy>';
-        $requestXmlBody .= '<ShippingPackageDetails>
-          <MeasurementUnit>English</MeasurementUnit>
-          <PackageDepth>9</PackageDepth>
-          <PackageLength>1</PackageLength>
-          <PackageWidth>8</PackageWidth>
-          <ShippingIrregular>true</ShippingIrregular>
-          <WeightMajor>0</WeightMajor>
-          <WeightMinor>1</WeightMinor>
-        </ShippingPackageDetails>';
-        $requestXmlBody .= '<ShippingDetails>';
+        $requestXmlBody .= '</ReturnPolicy>
+    <ShippingDetails>';
         $requestXmlBody .= '<ShippingType>Flat</ShippingType>';
         $requestXmlBody .= '<ShippingServiceOptions>';
         $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
@@ -177,11 +179,28 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<ShippingServicePriority>1</ShippingServicePriority>';
         $requestXmlBody .= '<ShippingService>' . $shippingservice . '</ShippingService>';
         $requestXmlBody .= '</ShippingServiceOptions>';
-        $requestXmlBody .= '</ShippingDetails>';
-        $requestXmlBody .= '</Item>';
+        $requestXmlBody .= '</ShippingDetails>
+    <ShippingPackageDetails> 
+      <MeasurementUnit>English</MeasurementUnit>
+          <PackageDepth>9</PackageDepth>
+          <PackageLength>1</PackageLength>
+          <PackageWidth>8</PackageWidth>
+          <ShippingIrregular>true</ShippingIrregular>
+          <WeightMajor>0</WeightMajor>
+          <WeightMinor>1</WeightMinor>
+    </ShippingPackageDetails>
+    <ShippingTermsInDescription> True </ShippingTermsInDescription>
+    <StartPrice currencyID="USD">'.$startPrice.'</StartPrice>
+    
+    
+    <Title><![CDATA['.$itemTitle.']]> </Title>
+  </Item>';
+
         $requestXmlBody .= '</ReviseItemRequest>';
 
-        //echo $requestXmlBody;
+
+
+        echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
         $session = new eBaySession($userToken, $devID, $appID, $certID, $serverUrl, $compatabilityLevel, $siteID, $verb);
 
@@ -350,6 +369,7 @@ class Products extends Admin_Controller {
         $sizes = $product_data->product_size;
         //the call being made:
         $verb = 'AddItem';
+        $paypalEmailAddress = 'tcesarusa@gmail.com';
 
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
@@ -405,9 +425,6 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<PrimaryCategory>';
         $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
         $requestXmlBody .= '</PrimaryCategory>';
-        $requestXmlBody .= '<BestOfferDetails>';
-        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
-        $requestXmlBody .= '</BestOfferDetails>';
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
