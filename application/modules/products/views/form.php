@@ -16,7 +16,7 @@
         } ?>
 <?php $this->layout->load_view('layout/header_buttons'); ?>
         <br><b>Check on Website: </b>
-        <a align="right" href="<?php echo "https://5bucksla.com/Products/product_details/" . $this->mdl_products->form_value('product_meta'); ?>" target="_blank"><?php echo $this->mdl_products->form_value('product_id'); ?></a>
+        <a align="right" href="<?php echo site_url()."Customer_products/product_details/" . $this->mdl_products->form_value('product_meta'); ?>" target="_blank"><?php echo $this->mdl_products->form_value('product_id'); ?></a>
     </div>
 
     <div id="content">
