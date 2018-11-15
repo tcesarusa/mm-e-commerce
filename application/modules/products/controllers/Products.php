@@ -188,7 +188,7 @@ class Products extends Admin_Controller {
           <WeightMajor>0</WeightMajor>
           <WeightMinor>1</WeightMinor>
     </ShippingPackageDetails>
-    <ShippingTermsInDescription> True </ShippingTermsInDescription>
+    <ShippingTermsInDescription>True</ShippingTermsInDescription>
     <StartPrice currencyID="USD">' . $startPrice . '</StartPrice>
     
     
