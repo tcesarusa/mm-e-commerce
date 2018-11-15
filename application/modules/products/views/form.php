@@ -14,7 +14,7 @@
         } else {
             echo "<a href='https://www.ebay.com/itm/" . $this->mdl_products->form_value('ebay_id') . "' target='_blank'>" . $this->mdl_products->form_value('ebay_id') . "</a>";
       ?>
-        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>">Revise Listing</a>
+        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>);">Revise Listing</a>
         <?php } ?>
 <?php $this->layout->load_view('layout/header_buttons'); ?>
         <br><b>Check on Website: </b>
