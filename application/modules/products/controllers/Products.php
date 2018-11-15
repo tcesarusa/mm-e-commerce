@@ -381,7 +381,7 @@ class Products extends Admin_Controller {
 
         ///Build the request Xml string
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
-        $requestXmlBody .= '<AddFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= '<AddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
         $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
         $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
@@ -474,7 +474,7 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
         $requestXmlBody .= '</Item>';
-        $requestXmlBody .= '</AddFixedPriceItemRequest>';
+        $requestXmlBody .= '</AddItemRequest>';
 
         //echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
