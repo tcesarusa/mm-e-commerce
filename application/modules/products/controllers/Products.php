@@ -474,7 +474,7 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
         $requestXmlBody .= '</Item>';
-        $requestXmlBody .= '</AddItemRequest>';
+        $requestXmlBody .= '</AddFixedPriceItemRequest>';
 
         //echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
