@@ -122,7 +122,7 @@ class Products extends Admin_Controller {
 
         ///Build the request Xml string
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
-        $requestXmlBody .= '<AddItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= '<AddFixedPriceItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
         $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
         $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
