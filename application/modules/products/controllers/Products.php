@@ -127,22 +127,22 @@ class Products extends Admin_Controller {
         $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>';
         $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
         $requestXmlBody .= '<Item>
-    <BuyItNowPrice currencyID="USD"> ' . $startPrice . ' </BuyItNowPrice>
-    <ConditionDescription> ' . $condition_description . ' </ConditionDescription>
-    <ConditionID> ' . $itemCondition . ' </ConditionID>
+    <BuyItNowPrice currencyID="USD">' . $startPrice . '</BuyItNowPrice>
+    <ConditionDescription>' . $condition_description . '</ConditionDescription>
+    <ConditionID>' . $itemCondition . '</ConditionID>
     <Country>US</Country>
     
-    <Description> ' . $itemDescription . ' </Description>
-    <DescriptionReviseMode> Replace </DescriptionReviseMode>
-    <DispatchTimeMax> 1 </DispatchTimeMax>
+    <Description>' . $itemDescription . '</Description>
+    <DescriptionReviseMode>Replace</DescriptionReviseMode>
+    <DispatchTimeMax>1</DispatchTimeMax>
     <ItemID>' . $ebay_id . '</ItemID>
-    <ListingDesigner> ListingDesignerType
-      <LayoutID> 10000 </LayoutID>
-      <ThemeID> 10 </ThemeID>
+    <ListingDesigner> 
+      <LayoutID>10000</LayoutID>
+      <ThemeID>10</ThemeID>
     </ListingDesigner>
-    <ListingDuration> GTC </ListingDuration>
-    <PaymentMethods> PayPal </PaymentMethods>
-    <PayPalEmailAddress> ' . $paypalEmailAddress . ' </PayPalEmailAddress>';
+    <ListingDuration>GTC</ListingDuration>
+    <PaymentMethods>PayPal</PaymentMethods>
+    <PayPalEmailAddress>' . $paypalEmailAddress . '</PayPalEmailAddress>';
         $requestXmlBody .= '<PictureDetails>';
 
         foreach ($img_name as $img_name) {
@@ -153,14 +153,14 @@ class Products extends Admin_Controller {
         }
 
         $requestXmlBody .= '</PictureDetails>';
-        $requestXmlBody .= '<PostalCode> 93306 </PostalCode>
+        $requestXmlBody .= '<PostalCode>93306</PostalCode>
     <PrimaryCategory>
-      <CategoryID> ' . $primaryCategory . ' </CategoryID>
+      <CategoryID>' . $primaryCategory . '</CategoryID>
     </PrimaryCategory>
     <ProductListingDetails> 
       <BrandMPN> 
-        <Brand> ' . $brand . ' </Brand>
-        <MPN> ' . $mpn . ' </MPN>
+        <Brand>' . $brand . '</Brand>
+        <MPN>' . $mpn . '</MPN>
       </BrandMPN>
       <UPC>' . $upc . '</UPC>
     </ProductListingDetails>
