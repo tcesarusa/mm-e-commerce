@@ -15,18 +15,21 @@ if (!defined('BASEPATH'))
 /**
  * Class Products
  */
-class Products extends Admin_Controller {
+class Products extends Admin_Controller
+{
 
     /**
      * Products constructor.
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
 
         $this->load->model('mdl_products');
     }
 
-    public function generate_gtin() {
+    public function generate_gtin()
+    {
 
         $products = $this->db->get("ip_products")->result_object();
         foreach ($products as $products) {
@@ -40,7 +43,8 @@ class Products extends Admin_Controller {
         }
     }
 
-    public function add_category() {
+    public function add_category()
+    {
         $category_name = $this->input->post("category_name");
         $category_parent = $this->input->post("category_parent");
         $category_meta = str_replace(" ", "-", $category_name);
@@ -57,7 +61,9 @@ class Products extends Admin_Controller {
     {
         require(APPPATH . 'third_party/keys.php');
         require(APPPATH . 'third_party/eBaySession.php');
+
         $product_id = $this->input->post("product_id");
+
         $this->db->where("product_id", $product_id);
         $product_data = $this->db->get("ip_products")->row();
 
@@ -75,7 +81,6 @@ class Products extends Admin_Controller {
         if ($product_data->product_image4 != null) {
             $img_name[] = $product_data->product_image4;
         }
-
         //check
         ini_set('magic_quotes_gpc', false);    // magic quotes will only confuse things like escaping apostrophe
         //Get the item entered
@@ -113,7 +118,7 @@ class Products extends Admin_Controller {
         $color = $product_data->product_color;
         $sizes = $product_data->product_size;
         //the call being made:
-        $verb = 'AddItem';
+        $verb = 'ReviseItem';
         $paypalEmailAddress = 'tcesarusa@gmail.com';
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
@@ -124,21 +129,54 @@ class Products extends Admin_Controller {
 //        $quantity = 1;
 
         ///Build the request Xml string
-        $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>
-        <ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
-        $requestXmlBody      = "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
+
+
+
+
+
+
+        $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
+        $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
+        $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
         $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
-        $requestXmlBody .= "<Item>
-    <Description>" . $itemDescription . "</Description>
-    <DescriptionReviseMode>Replace</DescriptionReviseMode>
-    <ItemID>" . $ebay_id . "</ItemID>
-    <ListingDuration>GTC</ListingDuration>   
-    <ConditionID>$itemCondition</ConditionID>
-	<ConditionDescription>$condition_description</ConditionDescription>    
-	<StartPrice>" . $startPrice . "</StartPrice>
-	<Quantity>" . $quantity . "</Quantity>
-    <Title>$itemTitle</Title>";
+        $requestXmlBody .= '<Item>';
+        $requestXmlBody .= "<ItemID>$ebay_id</ItemID>";
+        $requestXmlBody .= "<ItemSpecifics>";
+        $requestXmlBody .= "<NameValueList>
+        <Name>Brand</Name>
+        <Value>$brand</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Style</Name>
+        <Value>$style</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Size Type</Name>
+        <Value>$size_type</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Sleeve Style</Name>
+        <Value>$sleeve_style</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Color</Name>
+        <Value>$color</Value>
+      </NameValueList>
+      <NameValueList>
+        <Name>Size</Name>
+        <Value>$sizes</Value>
+      </NameValueList>";
+        $requestXmlBody .= "</ItemSpecifics>";
+        $requestXmlBody .= "<ProductListingDetails>";
+        $requestXmlBody .= "<UPC>Does not apply</UPC>";
+        $requestXmlBody .= "</ProductListingDetails>";
+        $requestXmlBody .= '<ConditionID>' . $itemCondition . '</ConditionID>';
+        $requestXmlBody .= '<Site>eBayMotors</Site>';
+        $requestXmlBody .= '<PrimaryCategory>';
+        $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
+        $requestXmlBody .= '</PrimaryCategory>';
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
@@ -147,6 +185,8 @@ class Products extends Admin_Controller {
             $requestXmlBody .= $img_name;
             $requestXmlBody .= '</PictureURL>';
         }
+
+        $requestXmlBody .= '</PictureDetails>';
         $requestXmlBody .= '<Country>US</Country>';
         $requestXmlBody .= '<Currency>USD</Currency>';
         $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
@@ -156,11 +196,11 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
         $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
         $requestXmlBody .= "<Quantity>$quantity</Quantity>";
-        //$requestXmlBody .= '<RegionID>77</RegionID>'
         $requestXmlBody .= "<StartPrice>$startPrice</StartPrice>";
         $requestXmlBody .= '<ShippingTermsInDescription>True</ShippingTermsInDescription>';
         $requestXmlBody .= "<Title><![CDATA[$itemTitle]]></Title>";
         $requestXmlBody .= "<Description><![CDATA[$itemDescription]]></Description>";
+        $requestXmlBody .= "<DescriptionReviseMode>Replace</DescriptionReviseMode>";
         $requestXmlBody .= '<ReturnPolicy>';
         $requestXmlBody .= '<ReturnsAcceptedOption>' . $returnsAccepted . '</ReturnsAcceptedOption>';
         $requestXmlBody .= '<ReturnsWithinOption>' . $returnWithin . '</ReturnsWithinOption>';
@@ -184,16 +224,14 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<ShippingService>' . $shippingservice . '</ShippingService>';
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
-        $requestXmlBody .= '</Item></ReviseItemRequest>';
-//        echo $requestXmlBody;
+        $requestXmlBody .= '</Item>';
+        $requestXmlBody .= '</ReviseItemRequest>';
+
         //Create a new eBay session with all details pulled in from included keys.php
         $session = new eBaySession($userToken, $devID, $appID, $certID, $serverUrl, $compatabilityLevel, $siteID, $verb);
 
         //send the request and get response
         $responseXml = $session->sendHttpRequest($requestXmlBody);
-
-        print_r($responseXml);
-        die();
         if (stristr($responseXml, 'HTTP 404') || $responseXml == '')
             die('<P>Error sending request');
 
@@ -299,7 +337,8 @@ class Products extends Admin_Controller {
         } // if $errors->length > 0
     }
 
-    public function AddEbayItem() {
+    public function AddEbayItem()
+    {
         require(APPPATH . 'third_party/keys.php');
         require(APPPATH . 'third_party/eBaySession.php');
         $product_id = $this->input->post("product_id");
@@ -310,16 +349,15 @@ class Products extends Admin_Controller {
         $img_name = array();
 
 
-
         $img_name[] = $product_data->product_image;
-        if($product_data->product_image2 != null){
-        $img_name[] = $product_data->product_image2;
+        if ($product_data->product_image2 != null) {
+            $img_name[] = $product_data->product_image2;
         }
-        if($product_data->product_image3 != null){
-        $img_name[] = $product_data->product_image3;
+        if ($product_data->product_image3 != null) {
+            $img_name[] = $product_data->product_image3;
         }
-        if($product_data->product_image4 != null){
-        $img_name[] = $product_data->product_image4;
+        if ($product_data->product_image4 != null) {
+            $img_name[] = $product_data->product_image4;
         }
 
         //check
@@ -413,9 +451,6 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<PrimaryCategory>';
         $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
         $requestXmlBody .= '</PrimaryCategory>';
-        $requestXmlBody .= '<BestOfferDetails>';
-        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
-        $requestXmlBody .= '</BestOfferDetails>';
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
@@ -488,35 +523,35 @@ class Products extends Admin_Controller {
                 $acks = $response->getElementsByTagName("Ack");
                 $ack = $acks->item(0)->nodeValue;
                 echo "Ack = $ack <BR />\n";   // Success if successful
-                if($ack == "Success"){
-                $endTimes = $response->getElementsByTagName("EndTime");
-                $endTime = $endTimes->item(0)->nodeValue;
-                echo "endTime = $endTime <BR />\n";
+                if ($ack == "Success") {
+                    $endTimes = $response->getElementsByTagName("EndTime");
+                    $endTime = $endTimes->item(0)->nodeValue;
+                    echo "endTime = $endTime <BR />\n";
 
-                $itemIDs = $response->getElementsByTagName("ItemID");
-                $itemID = @$itemIDs->item(0)->nodeValue;
-                echo "itemID = $itemID <BR />\n";
+                    $itemIDs = $response->getElementsByTagName("ItemID");
+                    $itemID = @$itemIDs->item(0)->nodeValue;
+                    echo "itemID = $itemID <BR />\n";
 
-                $linkBase = "http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=";
-                echo "<a href=$linkBase" . $itemID . ">$itemTitle</a> <BR />";
+                    $linkBase = "http://cgi.ebay.com/ws/eBayISAPI.dll?ViewItem&item=";
+                    echo "<a href=$linkBase" . $itemID . ">$itemTitle</a> <BR />";
 
-                $feeNodes = $responseDoc->getElementsByTagName('Fee');
-                foreach ($feeNodes as $feeNode) {
-                    $feeNames = $feeNode->getElementsByTagName("Name");
-                    if ($feeNames->item(0)) {
-                        $feeName = $feeNames->item(0)->nodeValue;
-                        $fees = $feeNode->getElementsByTagName('Fee');  // get Fee amount nested in Fee
-                        $fee = $fees->item(0)->nodeValue;
-                        if ($fee > 0.0) {
-                            if ($feeName == 'ListingFee') {
-                                printf("<B>$feeName : %.2f </B><BR>\n", $fee);
-                            } else {
-                                printf("$feeName : %.2f <BR>\n", $fee);
-                            }
-                        }  // if $fee > 0
-                    } // if feeName
-                } // foreach $feeNode
-                }else{
+                    $feeNodes = $responseDoc->getElementsByTagName('Fee');
+                    foreach ($feeNodes as $feeNode) {
+                        $feeNames = $feeNode->getElementsByTagName("Name");
+                        if ($feeNames->item(0)) {
+                            $feeName = $feeNames->item(0)->nodeValue;
+                            $fees = $feeNode->getElementsByTagName('Fee');  // get Fee amount nested in Fee
+                            $fee = $fees->item(0)->nodeValue;
+                            if ($fee > 0.0) {
+                                if ($feeName == 'ListingFee') {
+                                    printf("<B>$feeName : %.2f </B><BR>\n", $fee);
+                                } else {
+                                    printf("$feeName : %.2f <BR>\n", $fee);
+                                }
+                            }  // if $fee > 0
+                        } // if feeName
+                    } // foreach $feeNode
+                } else {
                     print_r($response);
                     $itemIDs = $response->getElementsByTagName("ItemID");
                     $itemID = @$itemIDs->item(0)->nodeValue;
@@ -579,7 +614,8 @@ class Products extends Admin_Controller {
         $this->db->update("ip_products");
     }
 
-    public function product_categories() {
+    public function product_categories()
+    {
         $categories = $this->db->get("ip_categories")->result_object();
         $products_tree = $this->db->get("ip_products")->result_object();
         foreach ($categories as $categories_totree) {
@@ -608,7 +644,8 @@ class Products extends Admin_Controller {
     /**
      * @param int $page
      */
-    public function index($page = 0) {
+    public function index($page = 0)
+    {
         $this->mdl_products->paginate(site_url('products/index'), $page);
         $products = $this->mdl_products->result();
 
@@ -621,7 +658,8 @@ class Products extends Admin_Controller {
     /**
      * @param null $id
      */
-    public function form($id = null) {
+    public function form($id = null)
+    {
         require(APPPATH . 'third_party/keys.php');
         require(APPPATH . 'third_party/eBaySession.php');
         $browse = '';
@@ -631,11 +669,11 @@ class Products extends Admin_Controller {
         $siteID = 0; //0-US,77-DE
 // Construct the FindItems call
         $apicall = "$endpoint?callname=GetCategoryInfo"
-                . "&appid=$appID"
-                . "&siteid=$siteID"
-                . "&CategoryID=-1"
-                . "&version=677"
-                . "&IncludeSelector=ChildCategories";
+            . "&appid=$appID"
+            . "&siteid=$siteID"
+            . "&CategoryID=-1"
+            . "&version=677"
+            . "&IncludeSelector=ChildCategories";
 
 // Load the call and capture the document returned by the GetCategoryInfo API
         $xml = simplexml_load_file($apicall);
@@ -655,8 +693,7 @@ class Products extends Admin_Controller {
             //if there is a long message (ie ErrorLevel=1), display it
             if (count($longMsg) > 0)
                 echo '<br>', str_replace(">", "&gt;", str_replace("<", "&lt;", $longMsg));
-        }
-        else { //no errors
+        } else { //no errors
             foreach ($xml->CategoryArray->Category as $cat) {
                 if ($cat->CategoryLevel != 0):
                     $browse .= '<option value="' . $cat->CategoryID . '">' . $cat->CategoryName . '</option>';
@@ -688,7 +725,7 @@ class Products extends Admin_Controller {
                 // Undefined | Multiple Files | $_FILES Corruption Attack
                 // If this request falls under any of them, treat it invalid.
                 if (!isset($_FILES['product_image']['error'][$image_count]) ||
-                        is_array($_FILES['product_image']['error'][$image_count])
+                    is_array($_FILES['product_image']['error'][$image_count])
                 ) {
                     throw new RuntimeException('Invalid parameters.');
                 }
@@ -716,11 +753,11 @@ class Products extends Admin_Controller {
                 $finfo = new finfo(FILEINFO_MIME_TYPE);
                 if (false === $ext = array_search(
                         $finfo->file($_FILES['product_image']['tmp_name'][$image_count]), array(
-                    'jpg' => 'image/jpeg',
-                    'png' => 'image/png',
-                    'gif' => 'image/gif',
-                        ), true
-                        )) {
+                        'jpg' => 'image/jpeg',
+                        'png' => 'image/png',
+                        'gif' => 'image/gif',
+                    ), true
+                    )) {
                     throw new RuntimeException('Invalid file format.');
                 }
 
@@ -729,10 +766,8 @@ class Products extends Admin_Controller {
 
                 $image = random_string('alnum', 16) . "_" . str_replace(" ", "-", $_FILES['product_image']['name'][$image_count]);
 
-                $targetPath = FCPATH."uploads/products/images/" . $image; // Target path where file is to be stored
+                $targetPath = FCPATH . "uploads/products/images/" . $image; // Target path where file is to be stored
                 move_uploaded_file($sourcePath, $targetPath); // Moving Uploaded file
-
-
 
 
                 if ($image != '') {
@@ -765,7 +800,7 @@ class Products extends Admin_Controller {
                 }
 
 
-                $image_count ++;
+                $image_count++;
                 if ($image_count == 4) {
                     break;
                 }
@@ -776,17 +811,16 @@ class Products extends Admin_Controller {
             //Product date
             $db_array['product_date'] = date("Y-m-d");
             $this->mdl_products->save($id, $db_array);
-            
+
             $this->db->where("product_id", $id);
-            @$thumb = $this->db->get("ip_products")->row()->product_image_thumb; 
-            
-                if(!file_exists($thumb))
-                {
-                    $this->db->where("product_id", $id);
-                    $this->db->set("product_image_thumb", "");
-                    $this->db->update("ip_products");
-                    $this->generate_thumb($id);
-                }
+            @$thumb = $this->db->get("ip_products")->row()->product_image_thumb;
+
+            if (!file_exists($thumb)) {
+                $this->db->where("product_id", $id);
+                $this->db->set("product_image_thumb", "");
+                $this->db->update("ip_products");
+                $this->generate_thumb($id);
+            }
 
             $this->db->where($db_array);
             $product_info = $this->db->get("ip_products")->result_object();
@@ -802,7 +836,7 @@ class Products extends Admin_Controller {
             redirect('products/form/' . $id);
         }
 
-        if ($id and ! $this->input->post('btn_submit')) {
+        if ($id and !$this->input->post('btn_submit')) {
 
             if (!$this->mdl_products->prep_form($id)) {
                 show_404();
@@ -837,17 +871,17 @@ class Products extends Admin_Controller {
         }
 
         $this->layout->set(
-                array(
-                    'families' => $this->mdl_families->get()->result(),
-                    'units' => $this->mdl_units->get()->result(),
-                    'tax_rates' => $this->mdl_tax_rates->get()->result(),
-                    'categories' => $categories,
-                    'colors' => $colors,
-                    'sizes' => $sizes,
-                    'ip_color_sizes' => $ip_color_sizes,
-                    "product_quantities" => $product_quantities,
-                    "browse" => $browse
-                )
+            array(
+                'families' => $this->mdl_families->get()->result(),
+                'units' => $this->mdl_units->get()->result(),
+                'tax_rates' => $this->mdl_tax_rates->get()->result(),
+                'categories' => $categories,
+                'colors' => $colors,
+                'sizes' => $sizes,
+                'ip_color_sizes' => $ip_color_sizes,
+                "product_quantities" => $product_quantities,
+                "browse" => $browse
+            )
         );
 
         $this->layout->buffer('content', 'products/form');
@@ -857,40 +891,42 @@ class Products extends Admin_Controller {
     /**
      * @param $id
      */
-    public function generate_thumb($product_id = null) {
+    public function generate_thumb($product_id = null)
+    {
         $this->load->library('image_lib');
         if ($product_id != null) {
             $this->db->where("product_id", $product_id);
         }
         $products = $this->db->get("ip_products")->result_object();
         foreach ($products as $products) {
-        if($products->product_image != ""){
-            $image_name = str_replace(base_url()."uploads/products/images/", "", $products->product_image);
+            if ($products->product_image != "") {
+                $image_name = str_replace(base_url() . "uploads/products/images/", "", $products->product_image);
 
-            $config['image_library'] = 'gd2';
-            $config['source_image'] = './uploads/products/images/' . $image_name;
-            $config['create_thumb'] = TRUE;
-            $config['new_image'] = "./uploads/products/images/thumbs/" . $image_name;
-            $config['maintain_ratio'] = TRUE;
-            $config['width'] = 260;
-            $config['height'] = 260;
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './uploads/products/images/' . $image_name;
+                $config['create_thumb'] = TRUE;
+                $config['new_image'] = "./uploads/products/images/thumbs/" . $image_name;
+                $config['maintain_ratio'] = TRUE;
+                $config['width'] = 260;
+                $config['height'] = 260;
 
-            $this->image_lib->initialize($config);
-            if (!$this->image_lib->resize()) {
-                echo $this->image_lib->display_errors();
-                die();
+                $this->image_lib->initialize($config);
+                if (!$this->image_lib->resize()) {
+                    echo $this->image_lib->display_errors();
+                    die();
+                }
+                $image_name = str_replace(".png", "_thumb.png", $image_name);
+                $image_name = str_replace(".JPG", "_thumb.JPG", $image_name);
+                $image_name = str_replace(".jpg", "_thumb.jpg", $image_name);
+                $this->db->set("product_image_thumb", base_url() . '/uploads/products/images/thumbs/' . $image_name);
+                $this->db->where("product_id", $products->product_id);
+                $this->db->update("ip_products");
             }
-            $image_name = str_replace(".png", "_thumb.png", $image_name);
-            $image_name = str_replace(".JPG", "_thumb.JPG", $image_name);
-            $image_name = str_replace(".jpg", "_thumb.jpg", $image_name);
-            $this->db->set("product_image_thumb", base_url().'/uploads/products/images/thumbs/' . $image_name);
-            $this->db->where("product_id", $products->product_id);
-            $this->db->update("ip_products");
-        }
         }
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $this->mdl_products->delete($id);
         redirect('products');
     }
@@ -942,7 +978,8 @@ class Products extends Admin_Controller {
             return false;
         }
     }*/
-    function getCategoriesInfo() {
+    function getCategoriesInfo()
+    {
         require_once(APPPATH . 'third_party/keys.php');
         require_once(APPPATH . 'third_party/eBaySession.php');
 
@@ -981,8 +1018,7 @@ class Products extends Admin_Controller {
             //if there is a long message (ie ErrorLevel=1), display it
             if (count($longMsg) > 0)
                 echo '<br>', str_replace(">", "&gt;", str_replace("<", "&lt;", $longMsg));
-        }
-        else { //no errors
+        } else { //no errors
             //if sub-categories found
             if ($xml->CategoryArray->Category->LeafCategory == 'false'):
 
