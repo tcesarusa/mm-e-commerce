@@ -47,7 +47,7 @@
             <!-- Sidebar ================================================== -->
             <?php $this->load->view("side_menu"); ?>
             <!-- Sidebar end=============================================== -->
-            <div class="span8">
+            <div class="col-md-8 ">
                 <div>
                     <h4>Featured Products <small class="pull-right"><?php echo $products_featured_quantity; ?>+ featured products</small></h4>
                     <div class="row-fluid">
@@ -69,8 +69,8 @@
                                             <ul class="thumbnails">
                                             <?php } ?>
 
-                                            <li class="span3">
-                                                <div class="thumbnail" style="height:270px; box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
+                                            <li class="span3" >
+                                                <div class="thumbnail" style="height:270px;  box-shadow: rgb(136, 136, 136) 3px 3px 3px;">
                                                     <i class="tag"></i>
                                                     <a href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products_featured_actives->product_meta; ?>">
                                                         <img src="<?php echo $products_featured_actives->product_image_thumb; ?>" class="img-thumbnail" title="<?php echo $products_featured_actives->product_name; ?>" alt="<?php echo $products_featured_actives->product_name; ?>"></a>
@@ -103,10 +103,10 @@
                 </div>
 
                 <h4>Latest Products </h4>
-                <ul class="thumbnails">
+                <ul class="thumbnails" style="margin-left:0px;">
                     <?php foreach ($latest_products as $products) { ?>
-                        <li class="span3">
-                            <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; height:390px;">
+                        <li class="span4" style="margin:5px; max-width:340px;">
+                            <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; height:320px;">
                                 <div class="card-header bg-success text-light">
                                     <h5><?php echo $products->product_name; ?></h5>
                                 </div>
@@ -114,7 +114,7 @@
 
 
                                 <a  href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>">
-                                    <img src="<?php echo $products->product_image_thumb; ?>" class="img-thumbnail" title="<?php echo $products->product_name; ?>" alt="<?php echo $products->product_name; ?>" style="width:auto; height:200px; max-width:230px;"/></a>
+                                    <img src="<?php echo $products->product_image_thumb; ?>" class="img-thumbnail" title="<?php echo $products->product_name; ?>" alt="<?php echo $products->product_name; ?>" style="width:auto; height:150px; max-width:180px;"/></a>
                                 <!--<div class="caption">
 <!--                                    <h5>--><?php //echo $products->product_name; ?><!--</h5>
                                     <p style="height:250px; overflow:auto;">
