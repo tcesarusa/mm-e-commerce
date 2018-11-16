@@ -162,7 +162,7 @@ Video URL
                             </label>
 
 
-                            <input type="text" <?php if($this->mdl_products->form_value('product_sizerequired') != "on") { ?>readonly<?php } ?> name="product_quantity" id="product_quantity" class="form-control" value="<?php echo $this->mdl_products->form_value('product_quantity'); ?>">
+                            <input type="text" name="product_quantity" id="product_quantity" class="form-control" value="<?php echo $this->mdl_products->form_value('product_quantity'); ?>">
 
                         </div>
 
