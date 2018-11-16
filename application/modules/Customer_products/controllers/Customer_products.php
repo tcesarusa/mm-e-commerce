@@ -441,10 +441,10 @@ class Customer_products extends My_Default {
                     "size" => $size_name,
                     "color_id" => $cart_color,
                     "size_id" => $cart_size,
-                    "lenght" => $product_dimensions->lenght,
-                    "width" => $product_dimensions->width,
-                    "height" => $product_dimensions->height,
-                    "weight" => $product_dimensions->weight
+                    "lenght" => @$product_dimensions->lenght,
+                    "width" => @$product_dimensions->width,
+                    "height" => @$product_dimensions->height,
+                    "weight" => @$product_dimensions->weight
                 );
             } else {
 
@@ -462,10 +462,10 @@ class Customer_products extends My_Default {
                     "size" => $size_name,
                     "color_id" => $cart_color,
                     "size_id" => $cart_size,
-                    "lenght" => $product_dimensions->lenght,
-                    "width" => $product_dimensions->width,
-                    "height" => $product_dimensions->height,
-                    "weight" => $product_dimensions->weight
+                    "lenght" => @$product_dimensions->lenght,
+                    "width" => @$product_dimensions->width,
+                    "height" => @$product_dimensions->height,
+                    "weight" => @$product_dimensions->weight
                 );
             }
 
