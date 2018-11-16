@@ -8,7 +8,7 @@
     // these keys can be obtained by registering at http://developer.ebay.com
     
     $production         = true;   // toggle to true if going against production
-    $compatabilityLevel = 1067;    // eBay API version
+    $compatabilityLevel = 1081;    // eBay API version
      
     if ($production) {
         $devID = '7ab39e9a-c5fe-4f7c-ab88-13b93367e0aa';   // these prod keys are different from sandbox keys
