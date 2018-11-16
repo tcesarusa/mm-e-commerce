@@ -120,59 +120,25 @@ class Products extends Admin_Controller {
           } */
         $returnWithin = "Days_30";
         $returnsAccepted = "ReturnsAccepted";
-        //$quantity = $product_data->product_quantity;
-        $quantity = 1;
+        $quantity = $product_data->product_quantity;
+//        $quantity = 1;
 
         ///Build the request Xml string
-        $requestXmlBody = '<?xml version="1.0" encoding="utf-8" ?>';
-        $requestXmlBody .= '<ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
-        $requestXmlBody .= "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
-        $requestXmlBody .= '<DetailLevel>ReturnAll</DetailLevel>';
+        $requestXmlBody = '<?xml version="1.0" encoding="utf-8"?>
+        <ReviseItemRequest xmlns="urn:ebay:apis:eBLBaseComponents">';
+        $requestXmlBody      = "<RequesterCredentials><eBayAuthToken>$userToken</eBayAuthToken></RequesterCredentials>";
         $requestXmlBody .= '<ErrorLanguage>en_US</ErrorLanguage>';
         $requestXmlBody .= "<Version>$compatabilityLevel</Version>";
-        $requestXmlBody .= '<Item>';
-        $requestXmlBody .= '<ItemID>'.$ebay_id.'</ItemID>';
-        $requestXmlBody .= "<ItemSpecifics>";
-        $requestXmlBody .= "<NameValueList>
-        <Name>Brand</Name>
-        <Value>$brand</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Style</Name>
-        <Value>$style</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Size Type</Name>
-        <Value>$size_type</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Sleeve Style</Name>
-        <Value>$sleeve_style</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Color</Name>
-        <Value>$color</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Size</Name>
-        <Value>$sizes</Value>
-      </NameValueList>";
-        $requestXmlBody .= "</ItemSpecifics>";
-        $requestXmlBody .= "<ProductListingDetails>";
-        $requestXmlBody .= "<BrandMPN> BrandMPNType
-          <Brand> $brand </Brand>
-          <MPN> $mpn </MPN>
-        </BrandMPN>";
-        $requestXmlBody .= "<UPC>Does not apply</UPC>";
-        $requestXmlBody .= "</ProductListingDetails>";
-        $requestXmlBody .= '<ConditionID>' . $itemCondition . '</ConditionID>';
-        $requestXmlBody .= '<Site>eBayMotors</Site>';
-        $requestXmlBody .= '<PrimaryCategory>';
-        $requestXmlBody .= "<CategoryID>$primaryCategory</CategoryID>";
-        $requestXmlBody .= '</PrimaryCategory>';
-        $requestXmlBody .= '<BestOfferDetails>';
-        $requestXmlBody .= '<BestOfferEnabled>1</BestOfferEnabled>';
-        $requestXmlBody .= '</BestOfferDetails>';
+        $requestXmlBody .= "<Item>
+    <Description>" . $itemDescription . "</Description>
+    <DescriptionReviseMode>Replace</DescriptionReviseMode>
+    <ItemID>" . $ebay_id . "</ItemID>
+    <ListingDuration>GTC</ListingDuration>   
+    <ConditionID>$itemCondition</ConditionID>
+	<ConditionDescription>$condition_description</ConditionDescription>    
+	<StartPrice>" . $startPrice . "</StartPrice>
+	<Quantity>" . $quantity . "</Quantity>
+    <Title>$itemTitle</Title>";
         $requestXmlBody .= '<PictureDetails>';
         //$requestXmlBody .= '<GalleryURL>http://www.choprafoundation.org/wp-content/uploads/2013/12/03-relaxation.jpg</GalleryURL>';
         foreach ($img_name as $img_name) {
@@ -181,24 +147,20 @@ class Products extends Admin_Controller {
             $requestXmlBody .= $img_name;
             $requestXmlBody .= '</PictureURL>';
         }
-
-        $requestXmlBody .= '</PictureDetails>';
-        //$requestXmlBody .= "<BuyItNowPrice currencyID=\"EUR\">$buyItNowPrice</BuyItNowPrice>";
         $requestXmlBody .= '<Country>US</Country>';
         $requestXmlBody .= '<Currency>USD</Currency>';
         $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
         $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
         $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
-        $requestXmlBody .= '<Location><![CDATA[Hawthorne, CA]]></Location>';
+        $requestXmlBody .= '<Location><![CDATA[Bakersfield, CA]]></Location>';
         $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
         $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
         $requestXmlBody .= "<Quantity>$quantity</Quantity>";
-        //$requestXmlBody .= '<RegionID>77</RegionID>';
+        //$requestXmlBody .= '<RegionID>77</RegionID>'
         $requestXmlBody .= "<StartPrice>$startPrice</StartPrice>";
         $requestXmlBody .= '<ShippingTermsInDescription>True</ShippingTermsInDescription>';
         $requestXmlBody .= "<Title><![CDATA[$itemTitle]]></Title>";
         $requestXmlBody .= "<Description><![CDATA[$itemDescription]]></Description>";
-        $requestXmlBody .= "<DescriptionReviseMode>Replace</DescriptionReviseMode>";
         $requestXmlBody .= '<ReturnPolicy>';
         $requestXmlBody .= '<ReturnsAcceptedOption>' . $returnsAccepted . '</ReturnsAcceptedOption>';
         $requestXmlBody .= '<ReturnsWithinOption>' . $returnWithin . '</ReturnsWithinOption>';
@@ -222,15 +184,16 @@ class Products extends Admin_Controller {
         $requestXmlBody .= '<ShippingService>' . $shippingservice . '</ShippingService>';
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
-        $requestXmlBody .= '</Item>';
-        $requestXmlBody .= '</ReviseItemRequest>';
-
+        $requestXmlBody .= '</Item></ReviseItemRequest>';
 //        echo $requestXmlBody;
         //Create a new eBay session with all details pulled in from included keys.php
         $session = new eBaySession($userToken, $devID, $appID, $certID, $serverUrl, $compatabilityLevel, $siteID, $verb);
 
         //send the request and get response
         $responseXml = $session->sendHttpRequest($requestXmlBody);
+
+        print_r($responseXml);
+        die();
         if (stristr($responseXml, 'HTTP 404') || $responseXml == '')
             die('<P>Error sending request');
 
@@ -463,17 +426,15 @@ class Products extends Admin_Controller {
         }
 
         $requestXmlBody .= '</PictureDetails>';
-        //$requestXmlBody .= "<BuyItNowPrice currencyID=\"EUR\">$buyItNowPrice</BuyItNowPrice>";
         $requestXmlBody .= '<Country>US</Country>';
         $requestXmlBody .= '<Currency>USD</Currency>';
         $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
         $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
         $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
-        $requestXmlBody .= '<Location><![CDATA[Hawthorne, CA]]></Location>';
+        $requestXmlBody .= '<Location><![CDATA[Bakersfield, CA]]></Location>';
         $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
         $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
         $requestXmlBody .= "<Quantity>$quantity</Quantity>";
-        //$requestXmlBody .= '<RegionID>77</RegionID>';
         $requestXmlBody .= "<StartPrice>$startPrice</StartPrice>";
         $requestXmlBody .= '<ShippingTermsInDescription>True</ShippingTermsInDescription>';
         $requestXmlBody .= "<Title><![CDATA[$itemTitle]]></Title>";
