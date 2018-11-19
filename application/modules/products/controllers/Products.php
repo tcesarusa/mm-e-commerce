@@ -334,6 +334,7 @@ class Products extends Admin_Controller
             } // foreach response
             //Insert into Database
             $xml = simplexml_load_string($responseXml);
+            echo "Item revised to ebay with success.";
         } // if $errors->length > 0
     }
 
