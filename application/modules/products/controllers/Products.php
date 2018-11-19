@@ -744,9 +744,9 @@ class Products extends Admin_Controller
                 }
 
                 // You should also check filesize here. 
-                if ($_FILES['product_image']['size'][$image_count] > 10000000) {
-                    throw new RuntimeException('Exceeded filesize limit.');
-                }
+//                if ($_FILES['product_image']['size'][$image_count] > 900000000) {
+//                    throw new RuntimeException('Exceeded filesize limit.');
+//                }
 
                 // DO NOT TRUST $_FILES['upfile']['mime'] VALUE !!
                 // Check MIME Type by yourself.
