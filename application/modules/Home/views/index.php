@@ -112,7 +112,7 @@
                                 <div class="card-header bg-success text-light" title="<?php echo $products->product_name; ?>">
                                     <a  href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>" style="color:white;"><h5><?php
                                         $this->load->model("Manage_strings");
-                                        $product_name = $this->Manage_strings->substrwords($products->product_name, 30, $end='...');
+                                        $product_name = $this->Manage_strings->substrwords($products->product_name, 40, $end='...');
                                         echo $product_name; ?></h5>
                                     </a>
                                 </div>
