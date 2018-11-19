@@ -1,4 +1,6 @@
-<?php $this->load->view("top_menu"); ?>
+<?php $this->load->view("top_menu");
+
+?>
 
 <!-- Header End====================================================================== -->
 <div id="carouselBlk" style="background:white;" class="container">
@@ -106,9 +108,13 @@
                 <ul class="thumbnails" style="margin-left:0px;">
                     <?php foreach ($latest_products as $products) { ?>
                         <li class="span4" style="margin:5px; max-width:340px;">
-                            <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; height:320px;">
-                                <div class="card-header bg-success text-light">
-                                    <h5><?php echo $products->product_name; ?></h5>
+                            <div class="card" style="box-shadow: rgb(136, 136, 136) 3px 3px 3px; max-height:320px;">
+                                <div class="card-header bg-success text-light" title="<?php echo $products->product_name; ?>">
+                                    <a  href="<?php echo site_url(); ?>Customer_products/product_details/<?php echo $products->product_meta; ?>" style="color:white;"><h5><?php
+                                        $this->load->model("Manage_strings");
+                                        $product_name = $this->Manage_strings->substrwords($products->product_name, 40, $end='...');
+                                        echo $product_name; ?></h5>
+                                    </a>
                                 </div>
                                 <div class="card-body" align="center">
 
