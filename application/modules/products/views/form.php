@@ -123,7 +123,7 @@ Video URL
                             </label>
 
                             <input type="text" name="ebay_title" id="ebay_title" class="form-control"
-                                   rows="3" value="<?php echo $this->mdl_products->form_value('ebay_title', true); ?>">
+                                   rows="3" value="<?php echo $this->mdl_products->form_value('ebay_title', true); ?>" maxlength="80">
                         </div>
                         <div class="form-group">
                             <label for="ebay_description">
