@@ -14,7 +14,7 @@
         } else {
             echo "<a href='https://www.ebay.com/itm/" . $this->mdl_products->form_value('ebay_id') . "' target='_blank'>" . $this->mdl_products->form_value('ebay_id') . "</a>";
       ?>
-        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>);">Revise Listing</a>
+        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>);" id="revise_listing">Revise Listing</a>
             <span class="alert alert-success" id="revise_warning" style="display:none;"></span>
         <?php } ?>
 <?php $this->layout->load_view('layout/header_buttons'); ?>
@@ -636,7 +636,8 @@ foreach ($colors as $colors1) {
 <script type="text/javascript">
     function ReviseEbay(product_id)
     {
-        $("#revise_warning").hide();
+        $("#revise_warning").html("Revising, please wait...");
+        $("#revise_listing").hide();
         $.post("<?php echo site_url(); ?>products/Products/ReviseEbayItem", {
             product_id:product_id
         }, function(data){
@@ -645,7 +646,9 @@ foreach ($colors as $colors1) {
             {
                 $("#revise_warning").html(data);
                 $("#revise_warning").show();
+
             }
+            $("#revise_listing").show();
         });
     }
     function remove_all()
