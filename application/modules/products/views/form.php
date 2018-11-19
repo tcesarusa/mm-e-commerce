@@ -636,6 +636,7 @@ foreach ($colors as $colors1) {
 <script type="text/javascript">
     function ReviseEbay(product_id)
     {
+        $("#revise_warning").show();
         $("#revise_warning").html("Revising, please wait...");
         $("#revise_listing").hide();
         $.post("<?php echo site_url(); ?>products/Products/ReviseEbayItem", {
@@ -647,8 +648,12 @@ foreach ($colors as $colors1) {
                 $("#revise_warning").html(data);
                 $("#revise_warning").show();
 
+
+
             }
+
             $("#revise_listing").show();
+            setTimeout(function(){ $("#revise_warning").hide(); }, 4000);
         });
     }
     function remove_all()
