@@ -5,7 +5,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
         <meta name=viewport content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex" />
         <title>5Bucksla - <?php if(!is_array($products)) { echo $products[0]->product_name; } ?> low prices, high quality, fast shipping, guaranteed satisfaction.</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="<?php foreach($products as $product_description){ echo $product_description->product_name.' '; } ?>">
