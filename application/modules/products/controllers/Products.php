@@ -93,7 +93,7 @@ class Products extends Admin_Controller
         $listingDuration = "GTC";
         $freeshipping = $product_data->product_free_shipping;
         if ($freeshipping == "" || $freeshipping == null) {
-            $freeshipping = "true";
+            $freeshipping = "false";
         }
         //$safequery = $_POST['searched_keyword'];
 
@@ -219,7 +219,7 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<ShippingServiceOptions>';
         $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
         $requestXmlBody .= '<ShippingServiceAdditionalCost currencyID="USD">0</ShippingServiceAdditionalCost>';
-        if($freeshipping != true){
+        if($freeshipping == "false"){
         $requestXmlBody .= '<ShippingServiceCost currencyID="USD">3.00</ShippingServiceCost>';
         }else{
             $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
@@ -377,7 +377,7 @@ class Products extends Admin_Controller
         $listingDuration = "GTC";
         $freeshipping = $product_data->product_free_shipping;
         if ($freeshipping == "" || $freeshipping == null) {
-            $freeshipping = "true";
+            $freeshipping = "false";
         }
         //$safequery = $_POST['searched_keyword'];
 
@@ -497,7 +497,7 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<ShippingServiceOptions>';
         $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
         $requestXmlBody .= '<ShippingServiceAdditionalCost currencyID="USD">0</ShippingServiceAdditionalCost>';
-        if($freeshipping != true){
+        if($freeshipping == "false"){
             $requestXmlBody .= '<ShippingServiceCost currencyID="USD">3.00</ShippingServiceCost>';
         }else{
             $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
