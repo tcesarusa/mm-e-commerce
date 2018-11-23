@@ -42,24 +42,24 @@
 
             <tbody>
             <?php foreach ($products as $product) { ?>
-                <tr>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><img src="<?php _htmlsc($product->product_image); ?>" style="width:250px;"/></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo $product->product_featured; ?></td>
+                <tr onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')">
+                    <td  style="cursor:pointer;"><img src="<?php _htmlsc($product->product_image_thumb); ?>" style="width:250px;"/></td>
+                    <td style="cursor:pointer;"><?php echo $product->product_featured; ?></td>
                     <?php if($product->ebay_id != 0) {?>
                     <td ><a onclick="window.open('https://www.ebay.com/itm/<?php echo $product->ebay_id; ?>', '_blank')" style="cursor:pointer;"><?php echo $product->ebay_id; ?></a></td>
                     <?php }else { ?>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo "No" ?></td>
+                    <td  style="cursor:pointer;"><?php echo "No" ?></td>
                     <?php } ?>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->family_name); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->product_sku); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->product_name); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo nl2br(htmlsc($product->product_description)); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo format_currency($product->product_price); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo $product->product_quantity; ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->unit_name); ?></td>
-                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo ($product->tax_rate_id) ? htmlsc($product->tax_rate_name) : trans('none'); ?></td>
+                    <td  style="cursor:pointer;"><?php _htmlsc($product->family_name); ?></td>
+                    <td  style="cursor:pointer;"><?php _htmlsc($product->product_sku); ?></td>
+                    <td  style="cursor:pointer;"><?php _htmlsc($product->product_name); ?></td>
+                    <td style="cursor:pointer;"><?php echo nl2br(htmlsc($product->product_description)); ?></td>
+                    <td  style="cursor:pointer;"><?php echo format_currency($product->product_price); ?></td>
+                    <td  style="cursor:pointer;"><?php echo $product->product_quantity; ?></td>
+                    <td  style="cursor:pointer;"><?php _htmlsc($product->unit_name); ?></td>
+                    <td  style="cursor:pointer;"><?php echo ($product->tax_rate_id) ? htmlsc($product->tax_rate_name) : trans('none'); ?></td>
                     <?php if (get_setting('sumex')) : ?>
-                        <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->product_tariff); ?></td>
+                        <td style="cursor:pointer;"><?php _htmlsc($product->product_tariff); ?></td>
                     <?php endif; ?>
                     <td>
                         <div class="options btn-group">
