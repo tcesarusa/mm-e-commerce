@@ -14,8 +14,8 @@
         } else {
             echo "<a href='https://www.ebay.com/itm/" . $this->mdl_products->form_value('ebay_id') . "' target='_blank'>" . $this->mdl_products->form_value('ebay_id') . "</a>";
       ?>
-        <a class="btn btn-default" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>);" id="revise_listing">Revise Listing</a>
-            <span class="alert alert-warning" id="revise_warning" style="display:none;"></span>
+        <a class="btn btn-default revise_listing<?php echo $this->mdl_products->form_value('product_id'); ?>" onclick="ReviseEbay(<?php echo $this->mdl_products->form_value('product_id'); ?>);" id="revise_listing<?php echo $this->mdl_products->form_value('product_id'); ?>">Revise Listing</a>
+            <span class="alert alert-warning revise_warning<?php echo $this->mdl_products->form_value('product_id'); ?>" id="revise_warning<?php echo $this->mdl_products->form_value('product_id'); ?>" style="display:none;"></span>
         <?php } ?>
 <?php $this->layout->load_view('layout/header_buttons'); ?>
         <br><b>Check on Website: </b>
@@ -634,27 +634,7 @@ foreach ($colors as $colors1) {
 
 </form>
 <script type="text/javascript">
-    function ReviseEbay(product_id)
-    {
-        $("#revise_warning").show();
-        $("#revise_warning").html("Revising, please wait...");
-        $("#revise_listing").hide();
-        $.post("<?php echo site_url(); ?>products/Products/ReviseEbayItem", {
-            product_id:product_id
-        }, function(data){
-            console.log(data);
-            if(data == 'Item revised to ebay with success.')
-            {
-                $("#revise_warning").removeClass("alert-warning");
-                $("#revise_warning").addClass("alert-success");
-                $("#revise_warning").html(data);
-                $("#revise_warning").show();
-            }
 
-            $("#revise_listing").show();
-            setTimeout(function(){ $("#revise_warning").hide(); }, 4000);
-        });
-    }
     function remove_all()
     {
         $.post("<?php echo site_url(); ?>/products/ajax/remove_all_quantities",

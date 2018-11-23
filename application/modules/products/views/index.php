@@ -38,32 +38,33 @@
                     <th><?php _trans('product_tariff'); ?></th>
                 <?php endif; ?>
                 <th><?php _trans('options'); ?></th>
+                <th>Revise</th>
             </tr>
             </thead>
 
             <tbody>
             <?php foreach ($products as $product) { ?>
-                <tr onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')">
-                    <td  style="cursor:pointer;"><img src="<?php _htmlsc($product->product_image_thumb); ?>" style="width:250px;"/></td>
-                    <td style="cursor:pointer;"><?php echo $product->product_featured; ?></td>
+                <tr >
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><img src="<?php _htmlsc($product->product_image_thumb); ?>" style="width:250px;"/></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo $product->product_featured; ?></td>
                     <?php if($product->ebay_id != 0) {?>
-                    <td ><a onclick="window.open('https://www.ebay.com/itm/<?php echo $product->ebay_id; ?>', '_blank')" style="cursor:pointer;"><?php echo $product->ebay_id; ?></a></td>
+                    <td  ><a onclick="window.open('https://www.ebay.com/itm/<?php echo $product->ebay_id; ?>', '_blank')" style="cursor:pointer;"><?php echo $product->ebay_id; ?></a></td>
                     <?php }else { ?>
-                    <td  style="cursor:pointer;"><?php echo "No" ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo "No" ?></td>
                     <?php } ?>
-                    <td  style="cursor:pointer;"><?php _htmlsc($product->family_name); ?></td>
-                    <td  style="cursor:pointer;"><?php _htmlsc($product->product_sku); ?></td>
-                    <td  style="cursor:pointer;"><?php _htmlsc($product->product_name); ?></td>
-                    <td  style="cursor:pointer;"><?php if($product->product_free_shipping == "true") { echo "Yes"; }else { echo "No"; } ?></td>
-                    <td style="cursor:pointer;"><?php echo nl2br(htmlsc($product->product_description)); ?></td>
-                    <td  style="cursor:pointer;"><?php echo format_currency($product->product_price); ?></td>
-                    <td  style="cursor:pointer;"><?php echo $product->product_quantity; ?></td>
-                    <td  style="cursor:pointer;"><?php _htmlsc($product->unit_name); ?></td>
-                    <td  style="cursor:pointer;"><?php echo ($product->tax_rate_id) ? htmlsc($product->tax_rate_name) : trans('none'); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->family_name); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->product_sku); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->product_name); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php if($product->product_free_shipping == "true") { echo "Yes"; }else { echo "No"; } ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo nl2br(htmlsc($product->product_description)); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo format_currency($product->product_price); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo $product->product_quantity; ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php _htmlsc($product->unit_name); ?></td>
+                    <td onclick="window.open('<?php echo site_url(); ?>/products/form/<?php echo $product->product_id; ?>')" style="cursor:pointer;"><?php echo ($product->tax_rate_id) ? htmlsc($product->tax_rate_name) : trans('none'); ?></td>
                     <?php if (get_setting('sumex')) : ?>
                         <td style="cursor:pointer;"><?php _htmlsc($product->product_tariff); ?></td>
                     <?php endif; ?>
-                    <td>
+                    <td onclick="">
                         <div class="options btn-group">
                             <a class="btn btn-default btn-sm dropdown-toggle"
                                data-toggle="dropdown" href="#">
@@ -83,6 +84,10 @@
                                 </li>
                             </ul>
                         </div>
+                    </td>
+                    <td>
+                        <a class="btn btn-default revise_listing<?php echo $product->product_id; ?>" onclick="ReviseEbay(<?php echo $product->product_id; ?>);" id="revise_listing<?php echo $product->product_id; ?>">Revise Listing</a>
+                        <span class="alert alert-warning revise_warning<?php echo $product->product_id; ?>" id="revise_warning<?php echo $product->product_id; ?>" style="display:none;"></span>
                     </td>
                     </tr></a>
             <?php } ?>

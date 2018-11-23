@@ -47,6 +47,28 @@
         <?php if (trans('cldr') != 'en') { ?>
             <script src="<?php echo base_url(); ?>assets/core/js/locales/bootstrap-datepicker.<?php _trans('cldr'); ?>.js"></script>
         <?php } ?>
-        
+        <script type="text/javascript">
+            function ReviseEbay(product_id)
+            {
+                $(".revise_warning"+product_id).show();
+                $(".revise_warning"+product_id).html("Revising, please wait...");
+                $(".revise_listing"+product_id).hide();
+                $.post("<?php echo site_url(); ?>products/Products/ReviseEbayItem", {
+                    product_id:product_id
+                }, function(data){
+                    console.log(data);
+                    if(data == 'Item revised to ebay with success.')
+                    {
+                        $(".revise_warning"+product_id).removeClass("alert-warning");
+                        $(".revise_warning"+product_id).addClass("alert-success");
+                        $(".revise_warning"+product_id).html(data);
+                        $(".revise_warning"+product_id).show();
+                    }
+
+                    $(".revise_listing"+product_id).show();
+                    setTimeout(function(){ $(".revise_warning"+product_id).hide(); }, 4000);
+                });
+            }
+        </script>
     </body>
 </html>
