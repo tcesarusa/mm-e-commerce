@@ -28,6 +28,7 @@
                 <th><?php _trans('family'); ?></th>
                 <th><?php _trans('product_sku'); ?></th>
                 <th><?php _trans('product_name'); ?></th>
+                <th>Free Shipping</th>
                 <th><?php _trans('product_description'); ?></th>
                 <th><?php _trans('product_price'); ?></th>
                 <th>Product quantity</th>
@@ -53,6 +54,7 @@
                     <td  style="cursor:pointer;"><?php _htmlsc($product->family_name); ?></td>
                     <td  style="cursor:pointer;"><?php _htmlsc($product->product_sku); ?></td>
                     <td  style="cursor:pointer;"><?php _htmlsc($product->product_name); ?></td>
+                    <td  style="cursor:pointer;"><?php if($product->product_free_shipping == "true") { echo "Yes"; }else { echo "No"; } ?></td>
                     <td style="cursor:pointer;"><?php echo nl2br(htmlsc($product->product_description)); ?></td>
                     <td  style="cursor:pointer;"><?php echo format_currency($product->product_price); ?></td>
                     <td  style="cursor:pointer;"><?php echo $product->product_quantity; ?></td>
