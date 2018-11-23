@@ -219,7 +219,7 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<ShippingServiceOptions>';
         $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
         $requestXmlBody .= '<ShippingServiceAdditionalCost currencyID="USD">0</ShippingServiceAdditionalCost>';
-        if($shippingservice != true){
+        if($freeshipping != true){
         $requestXmlBody .= '<ShippingServiceCost currencyID="USD">3.00</ShippingServiceCost>';
         }else{
             $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
@@ -497,8 +497,13 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<ShippingServiceOptions>';
         $requestXmlBody .= '<FreeShipping>' . $freeshipping . '</FreeShipping>';
         $requestXmlBody .= '<ShippingServiceAdditionalCost currencyID="USD">0</ShippingServiceAdditionalCost>';
-        $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
+        if($freeshipping != true){
+            $requestXmlBody .= '<ShippingServiceCost currencyID="USD">3.00</ShippingServiceCost>';
+        }else{
+            $requestXmlBody .= '<ShippingServiceCost currencyID="USD">0</ShippingServiceCost>';
+        }
         $requestXmlBody .= '<ShippingServicePriority>1</ShippingServicePriority>';
+
         $requestXmlBody .= '<ShippingService>' . $shippingservice . '</ShippingService>';
         $requestXmlBody .= '</ShippingServiceOptions>';
         $requestXmlBody .= '</ShippingDetails>';
