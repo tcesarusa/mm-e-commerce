@@ -46,10 +46,10 @@
 
                             <input type="file" name="product_image[]" id="product_image" multiple>
                             <div id="images" style="padding:15px;">
-<?php if ($this->mdl_products->form_value('product_image') != '') { ?>
+<?php if ($this->mdl_products->form_value('product_image_thumb') != '') { ?>
                                     <div id="image1" style="display:inline-block; margin:10px; box-shadow: 5px 5px 5px #888888; border:1px #ddd solid;">
                                         <span style="float:right; margin-right:10px; cursor:pointer; color:red;" onclick="remove_image('1');" title="Remove this image">Remove</span>
-                                        <img src="<?php echo $this->mdl_products->form_value('product_image', true); ?>" style="width:250px; height:250px;"/>  
+                                        <img src="<?php echo $this->mdl_products->form_value('product_image_thumb', true); ?>" style="width:250px; height:250px;"/>
                                     </div>
 <?php } if ($this->mdl_products->form_value('product_image2') != '') { ?>
                                     <div id="image2" style="display:inline-block; margin:10px; box-shadow: 5px 5px 5px #888888; border:1px #ddd solid;">
