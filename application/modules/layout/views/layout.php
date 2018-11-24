@@ -62,11 +62,11 @@
                         $(".revise_warning"+product_id).removeClass("alert-warning");
                         $(".revise_warning"+product_id).addClass("alert-success");
                         $(".revise_warning"+product_id).html(data);
-                        $(".revise_warning"+product_id).show();
+
                     }
 
                     $(".revise_listing"+product_id).show();
-                    setTimeout(function(){ $(".revise_warning"+product_id).hide(); }, 4000);
+                    setTimeout(function(){ $(".revise_warning"+product_id).hide(); $(".revise_warning"+product_id).show(); }, 4000);
                 });
             }
         </script>
