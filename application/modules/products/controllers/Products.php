@@ -192,7 +192,7 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
         $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
         $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
-//        $requestXmlBody .= '<Location><![CDATA[Bakersfield,93306 CA]]></Location>';
+        $requestXmlBody .= '<Location><![CDATA[Bakersfield,93306 CA]]></Location>';
         $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
         $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
         $requestXmlBody .= "<Quantity>$quantity</Quantity>";
@@ -471,7 +471,7 @@ class Products extends Admin_Controller
         $requestXmlBody .= '<DispatchTimeMax>1</DispatchTimeMax>';
         $requestXmlBody .= "<ListingDuration>$listingDuration</ListingDuration>";
         $requestXmlBody .= '<ListingType>' . $listingType . '</ListingType>';
-//        $requestXmlBody .= '<Location><![CDATA[Bakersfield, CA]]></Location>';
+        $requestXmlBody .= '<Location><![CDATA[Bakersfield,93306 CA]]></Location>';
         $requestXmlBody .= '<PaymentMethods>PayPal</PaymentMethods>';
         $requestXmlBody .= "<PayPalEmailAddress>$paypalEmailAddress</PayPalEmailAddress>";
         $requestXmlBody .= "<Quantity>$quantity</Quantity>";
