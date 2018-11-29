@@ -111,9 +111,9 @@ class Products extends Admin_Controller
         $brand = $product_data->provider_name;
         $mpn = $product_data->product_mpn;
         $size_mens = "Large";
-        $style = "Basic Tee";
+        $style = "";
         $size_type = "Regular";
-        $sleeve_style = "Short Sleeve";
+        $sleeve_style = "";
         $siteID = 0;
         $color = $product_data->product_color;
         $sizes = $product_data->product_size;
@@ -123,7 +123,7 @@ class Products extends Admin_Controller
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
           } */
-        $returnWithin = "Days_30";
+        $returnWithin = "Days_10";
         $returnsAccepted = "ReturnsAccepted";
         $quantity = $product_data->product_quantity;
 //        $quantity = 1;
@@ -149,16 +149,8 @@ class Products extends Admin_Controller
         <Value>$brand</Value>
       </NameValueList>
       <NameValueList>
-        <Name>Style</Name>
-        <Value>$style</Value>
-      </NameValueList>
-      <NameValueList>
         <Name>Size Type</Name>
         <Value>$size_type</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Sleeve Style</Name>
-        <Value>$sleeve_style</Value>
       </NameValueList>
       <NameValueList>
         <Name>Color</Name>
@@ -392,9 +384,8 @@ class Products extends Admin_Controller
         $brand = $product_data->provider_name;
         $mpn = $product_data->product_mpn;
         $size_mens = "Large";
-        $style = "Basic Tee";
+        $style = "";
         $size_type = "Regular";
-        $sleeve_style = "Short Sleeve";
         $siteID = 0;
         $color = $product_data->product_color;
         $sizes = $product_data->product_size;
@@ -426,14 +417,6 @@ class Products extends Admin_Controller
       <NameValueList>
         <Name>Style</Name>
         <Value>$style</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Size Type</Name>
-        <Value>$size_type</Value>
-      </NameValueList>
-      <NameValueList>
-        <Name>Sleeve Style</Name>
-        <Value>$sleeve_style</Value>
       </NameValueList>
       <NameValueList>
         <Name>Color</Name>
