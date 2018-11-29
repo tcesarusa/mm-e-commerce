@@ -123,7 +123,7 @@ class Products extends Admin_Controller
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
           } */
-        $returnWithin = "Days_10";
+        $returnWithin = "Days_30";
         $returnsAccepted = "ReturnsAccepted";
         $quantity = $product_data->product_quantity;
 //        $quantity = 1;
@@ -396,7 +396,7 @@ class Products extends Admin_Controller
         /* if ($listingType == 'FixedPriceItem') {
           $buyItNowPrice = 0.0;   // don't have BuyItNow for FixedPriceItem
           } */
-        $returnWithin = "Days_10";
+        $returnWithin = "Days_30";
         $returnsAccepted = "ReturnsAccepted";
         //$quantity = $product_data->product_quantity;
         $quantity = 1;
